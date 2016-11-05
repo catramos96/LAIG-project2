@@ -51,7 +51,7 @@
  MyComponent.prototype.getPrimitives = function(){        //Primitives
  	return this.primitives;
  }
-
+ 
  MyComponent.prototype.getComponentsChilds = function(){  //Components children
  	return this.components;
  }

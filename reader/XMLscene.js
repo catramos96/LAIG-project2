@@ -25,6 +25,9 @@ XMLscene.prototype.init = function (application) {
     this.gl.depthFunc(this.gl.LEQUAL); 	//depth func  = LEQUAL, enable
     this.gl.frontFace(this.gl.CCW); 	//front face   = CCW
 	
+	//para a transparencia
+	this.gl.enable(this.gl.BLEND);
+	this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE);
 };
 
 /**
@@ -35,8 +38,10 @@ XMLscene.prototype.init = function (application) {
  */ 
 XMLscene.prototype.initLights = function () {
 
+	this.lights = [];
+	
     for (var i = 0; i < this.graph.lightsList.length; i++) 
-	{
+	{	
     	this.graph.lightsList[i].init(this,i);	//individual initialization
 
 		this.lights[i].update();				//update
@@ -83,6 +88,30 @@ XMLscene.prototype.initCamera = function () {
 	
 	this.interface.setActiveCamera(this.camera);
 };
+
+XMLscene.prototype.initPrimitives = function () {
+	
+	this.primitivesInit = new Map();
+	
+	for (var [id, value] of this.graph.primitivesList) 
+	{
+		if(value instanceof MyRectangleData){
+			this.primitivesInit.set(id,new MyRectangle(this, value,1,1));
+		}	
+		else if(value instanceof MyTriangleData){
+			this.primitivesInit.set(id,new MyTriangle(this, value,1,1));
+		}	
+		else if(value instanceof MyCylinderData){
+			this.primitivesInit.set(id,new MyCylinder(this, value));
+		}
+		else if(value instanceof MySphereData){
+			this.primitivesInit.set(id,new MySphere(this, value));
+		}
+		else if(value instanceof MyTorusData){
+			this.primitivesInit.set(id,new MyTorus(this, value));
+		}
+	}
+}
 
 /**
  * Update Lights.
@@ -174,6 +203,8 @@ XMLscene.prototype.onGraphLoaded = function () {
 	this.initMaterials();
 
 	this.initTextures();	
+	
+	this.initPrimitives();
 };
 
 /**
@@ -232,27 +263,18 @@ XMLscene.prototype.displayComponents = function (component, materials, texture) 
 	var primitives = component.getPrimitives();
 	for (var i = 0; i < primitives.length; i++)
 	{
-		var value = primitives[i];
+		var prim = primitives[i];
 		
-		if(value instanceof MyRectangleData){
-			var prim = new MyRectangle(this, value,lS,lT);
-			prim.display();
-		}	
-		else if(value instanceof MyTriangleData){
-			var prim = new MyTriangle(this, value,lS,lT);
-			prim.display();
-		}	
-		else if(value instanceof MyCylinderData){
-			var prim = new MyCylinder(this, value);
-			prim.display();
-		}
-		else if(value instanceof MySphereData){
-			var prim = new MySphere(this, value);
-			prim.display();
-		}
-		else if(value instanceof MyTorusData){
-			var prim = new MyTorus(this, value);
-			prim.display();
+		if(this.primitivesInit.has(prim.getId()))
+		{
+			var primInit = this.primitivesInit.get(prim.getId());
+			
+			if(prim instanceof MyRectangle)
+				primInit.setTextureLength(ls,lt);	
+			else if(prim instanceof MyTriangle)
+				primInit.setTextureLength(ls,lt);
+		
+			primInit.display();
 		}
 	}
 

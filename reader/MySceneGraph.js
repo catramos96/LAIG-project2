@@ -430,6 +430,7 @@ MySceneGraph.prototype.parseLights = function(rootElement) {
 
 		//extra elements for spot Light
 		if(spot == 1){
+			
 			angle = this.reader.getFloat(lights, 'angle')*Math.PI*2/360;
 			exponent = this.reader.getFloat(lights, 'exponent');
 

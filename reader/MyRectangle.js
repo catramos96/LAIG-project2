@@ -63,10 +63,18 @@
       0,0,1,
       0,0,1
  	];
+	
+	this.setTextureLength(this.lS, this.lT);
+ 	
+ 	this.primitiveType = this.scene.gl.TRIANGLES;
+ 	this.initGLBuffers();
+ };
 
+ MyRectangle.prototype.setTextureLength = function(lS,lT) {
+	 
 	//Texture coordinates to map the texture
- 	var S = (xmax - xmin) / this.lS;
- 	var T = (ymax - ymin) / this.lT;
+ 	var S = (this.p2.getX() - this.p1.getX()) / lS;
+ 	var T = (this.p2.getY() - this.p1.getY()) / lT;
 
  	this.texCoords = [
 		0, T,	   
@@ -74,7 +82,4 @@
 		S, 0,
 		0, 0
  	];
- 	
- 	this.primitiveType = this.scene.gl.TRIANGLES;
- 	this.initGLBuffers();
- };
+ }

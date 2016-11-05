@@ -98,33 +98,39 @@ MyLight.prototype.printInfo = function(){
   */
  MyLight.prototype.init = function(scene, i){
 	
-	scene.lights[i].setPosition(this.location[0],this.location[1],this.location[2],1);
-	scene.lights[i].setDiffuse(this.diffuse.getR(),this.diffuse.getG(),this.diffuse.getB(),this.diffuse.getA());
-	scene.lights[i].setAmbient(this.ambient.getR(),this.ambient.getG(),this.ambient.getB(),this.ambient.getA());
-	scene.lights[i].setSpecular(this.specular.getR(),this.specular.getG(),this.specular.getB(),this.specular.getA());
+	var light = new CGFlight(scene,i);
+	
+	light.setPosition(this.location[0],this.location[1],this.location[2],1);
+	light.setDiffuse(this.diffuse.getR(),this.diffuse.getG(),this.diffuse.getB(),this.diffuse.getA());
+	light.setAmbient(this.ambient.getR(),this.ambient.getG(),this.ambient.getB(),this.ambient.getA());
+	light.setSpecular(this.specular.getR(),this.specular.getG(),this.specular.getB(),this.specular.getA());
 	
 	if(this.isSpot())
 	{
-		scene.lights[i].setSpotDirection(vec3.distance(vec3.fromValues(this.location[0],this.location[1],this.location[2]),
-														vec3.fromValues(this.target.getX(),this.target.getY(),this.target.getZ())));
-		scene.lights[i].setSpotCutOff(this.angle);
-		scene.lights[i].setSpotExponent(this.exponent);					  
+		var dirX = this.target.getX() - this.location[0];
+		var dirY = this.target.getY() - this.location[1];
+		var dirZ = this.target.getZ() - this.location[2];
+		
+		light.setSpotDirection(dirX,dirY,dirZ);
+		light.setSpotCutOff(this.angle);
+		light.setSpotExponent(this.exponent);					  
 	}
 	
-	scene.lights[i].setVisible(true);
+	light.setVisible(true);
 	
 	var bool;
 
 	//Enable?
 	if(this.enable){
-		scene.lights[i].enable();
+		light.enable();
 		eval("scene."+this.id+"=true");		//adds boolean = true to scene
 	}
 	else{
-		scene.lights[i].disable();
+		light.disable();
 		eval("scene."+this.id+"=false");	//adds boolean = false to scene
 	}	
 	
 	scene.interface.addLights(this.id,this.spot);	//adds the light to the interface folder of lights
 
+	scene.lights.push(light);
  }
