@@ -5,10 +5,13 @@
      this.uDivs = data.getUDivs();
      this.vDivs = data.getVDivs();
      
+	//MyPatch.prototype = new CGFnurbsObject( scene, func, uDivs, vDivs );
+     
      this.initBuffers();
  }
 
- MyPatch.prototype = new CGFnurbsObject( scene, func, uDivs, vDivs );
+ 
+ MyPatch.prototype = Object.create(CGFobject.prototype);
 
  /**
   * Init

@@ -1,29 +1,29 @@
- function MyPatchDataData(id,func, uDivs, vDivs) {
+ function MyPatchData(id,func, uDivs, vDivs) {
      this.id = id;
      this.func = func;
      this.uDivs = uDivs;
      this.vDivs = vDivs;
  }
 
- PatchDataData.prototype = new MyPrimitive(this.id); 
- MyMyPatchDataData.prototype.constructor = MyPatchDataData;
+ MyPatchData.prototype = new MyPrimitive(this.id); 
+ MyPatchData.prototype.constructor = MyPatchData;
 
  /**
   * GETS
   */
 
- MyPatchDataData.prototype.getId = function(){
+ MyPatchData.prototype.getId = function(){
      return this.id;
  }
 
- MyPatchDataData.prototype.getFunc = function(){
+ MyPatchData.prototype.getFunc = function(){
      return this.func;
  }
 
- MyPatchDataData.prototype.getUDivs = function(){
+ MyPatchData.prototype.getUDivs = function(){
      return this.UDivs;
  }
 
- MyPatchDataData.prototype.getVDivs = function(){
+ MyPatchData.prototype.getVDivs = function(){
      return this.VDivs;
  }

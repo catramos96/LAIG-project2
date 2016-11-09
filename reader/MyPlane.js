@@ -6,10 +6,13 @@
      this.uDivs = data.getUDivs();
      this.vDivs = data.getVDivs();
 
+	 //MyPlane.prototype = new CGFnurbsObject(scene, null, uDivs, vDivs );
+
      this.initBuffers();
  }
 
- MyPlane.prototype = new CGFnurbsObject( scene, null, uDivs, vDivs );
+ 
+ MyPlane.prototype = Object.create(CGFobject.prototype);
 
 
  /**

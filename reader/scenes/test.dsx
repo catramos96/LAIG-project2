@@ -140,6 +140,12 @@
         <primitive id="miniTorus">
             <torus inner="0.4" outer="0.5" slices="10" loops="10" />
         </primitive>
+
+        <!-- TESTE -->
+
+        <primitive id="defaultPlane">
+            <plane dimX="1" dimY="1" partsX="4" partsY="4"/>
+        </primitive>
         
     </primitives>
 	
@@ -189,7 +195,7 @@
 			<texture id="sunTexture" />
 
 			<children>
-            	<primitiveref id = "sphere" />
+            	<primitiveref id = "defaultPlane" />
             </children>
             
         </component>

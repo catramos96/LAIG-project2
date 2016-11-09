@@ -1,15 +1,15 @@
- function MyVehicleDataData(id) {
+ function MyVehicleData(id) {
      this.id = id;
  }
 
- MyVehicleDataData.prototype = new MyPrimitive(this.id); 
- MyVehicleDataData.prototype.constructor = MyVehicleDataData;
+ MyVehicleData.prototype = new MyPrimitive(this.id); 
+ MyVehicleData.prototype.constructor = MyVehicleData;
 
  /**
   * GETS
   */
 
- MyVehicleDataData.prototype.getId = function(){
+ MyVehicleData.prototype.getId = function(){
      return this.id;
  }
 

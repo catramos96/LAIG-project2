@@ -110,6 +110,9 @@ XMLscene.prototype.initPrimitives = function () {
 		else if(value instanceof MyTorusData){
 			this.primitivesInit.set(id,new MyTorus(this, value));
 		}
+		/*else if(value instanceof MyPlaneData){
+			this.primitivesInit.set(id,new MyPlane(this, value));
+		}*/
 	}
 }
 
