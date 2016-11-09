@@ -881,16 +881,23 @@ MySceneGraph.prototype.parseAnimations = function(rootElement) {
 				
 				for(var j = 0; j < n_points; j++)
 				{
-					var tempPoints = new MyPoint(this.reader.getFloat(animation.children[0], 'xx'),
-												this.reader.getFloat(animation.children[0], 'yy'),
-												this.reader.getFloat(animation.children[0], 'zz'));
+					var tempPoints = new MyPoint(this.reader.getFloat(animation.children[j], 'xx'),
+												this.reader.getFloat(animation.children[j], 'yy'),
+												this.reader.getFloat(animation.children[j], 'zz'));
 					list.push(tempPoints);
 				}
-				
+				anim = new LinearAnimation(id, deltaT, list);
 				break;
 			}
 			case "circular":
 			{
+				var r = this.reader.getFloat(animation, 'radius');
+				var sAng = this.reader.getFloat(animation, 'startang');
+				var rAng = this.reader.getFloat(animation, 'rotang');
+				var tempPoint = new MyPoint(this.reader.getFloat(animation, 'centerx'),
+											this.reader.getFloat(animation, 'centery'),
+											this.reader.getFloat(animation, 'centerz')); 
+				anim = new CircularAnimation(id,deltaT,tempPoint,r,sAng,rAng);
 				break;
 			}
 			default:
@@ -899,7 +906,7 @@ MySceneGraph.prototype.parseAnimations = function(rootElement) {
 		this.animationsList.set(id,anim);	//coloca a animacao na lista
 		
 		//DEBUG
-		//this.animationsList.get(id).printInfo();
+		this.animationsList.get(id).printInfo();
 	}
 }
 

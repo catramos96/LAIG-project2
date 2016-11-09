@@ -152,10 +152,10 @@
 		<!-- os angulos sao expressos em graus  -->
 		<animation id="animation1" span="2" type="linear">
 			<controlpoint xx="0" yy="0" zz="0" />
-			<controlpoint xx="0" yy="0" zz="6" />
+			<controlpoint xx="3" yy="3" zz="3" />
 		</animation>
-
-		<animation id="animation2" span="2" type="circular" center="0 0 0" radius="3" startang="0" rotang="90" />
+		
+		<animation id="animation2" span="3" type="circular" centerx="1" centery="1" centerz="1" radius="3" startang="0" rotang="90" />
 	</animations>
 
     <components>
