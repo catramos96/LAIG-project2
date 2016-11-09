@@ -1,4 +1,4 @@
- function MyPlaneDataData(id,dX,dY, uDivs, vDivs) {
+ function MyPlaneData(id,dX,dY, uDivs, vDivs) {
      this.id = id;
      this.dX = dX;
      this.dY = dY;
@@ -6,29 +6,29 @@
      this.vDivs = vDivs;
  }
 
- MyPlaneDataData.prototype = new MyPrimitive(this.id); 
- MyPlaneDataData.prototype.constructor = MyPlaneDataData;
+ MyPlaneData.prototype = new MyPrimitive(this.id); 
+ MyPlaneData.prototype.constructor = MyPlaneData;
 
  /**
   * GETS
   */
 
- MyPlaneDataData.prototype.getId = function(){
+ MyPlaneData.prototype.getId = function(){
      return this.id;
  }
 
- MyPlaneDataData.prototype.getDX = function(){
+ MyPlaneData.prototype.getDX = function(){
      return this.dX;
  }
 
- MyPlaneDataData.prototype.getDY = function(){
+ MyPlaneData.prototype.getDY = function(){
      return this.dY;
  }
 
- MyPlaneDataData.prototype.getuDivs = function(){
+ MyPlaneData.prototype.getUDivs = function(){
      return this.uDivs;
  }
 
- MyPlaneDataData.prototype.getvDivs = function(){
+ MyPlaneData.prototype.getVDivs = function(){
      return this.vDivs;
  }

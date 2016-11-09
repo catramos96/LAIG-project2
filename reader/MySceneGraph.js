@@ -824,6 +824,17 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 				prim = new MyTorusData(id,inn,o,sl,l);
 				break;
 			}
+			case "plane" : {
+				var dx,dy,u,v;
+
+				dx = this.reader.getFloat(primitive.children[0], 'dimX');
+				dy = this.reader.getFloat(primitive.children[0], 'dimY');
+				u = this.reader.getFloat(primitive.children[0], 'partsX');
+				v = this.reader.getFloat(primitive.children[0], 'partsY');
+				
+				prim = new MyPlaneData(id,dx,dy,u,v);
+				break;
+			}
 		}
 		this.primitivesList.set(id,prim);
 		
