@@ -34,6 +34,12 @@ serialInclude(['../lib/CGF.js', 'XMLscene.js',
 								'MySphereData.js',
 								'MyTorusData.js',
 								'MyInterface.js',
+								'MyPlane.js',
+								'MyPatch.js',
+								'MyVehicle.js',
+								'MyPlaneData.js',
+								'MyPatchData.js',
+								'MyVehicleData.js',
 
 main=function()
 {
