@@ -22,6 +22,8 @@ function MySceneGraph(filename, scene) {
 	this.transformationsList = new Map();		//transformations map
 	this.primitivesList = new Map();			//primitives map
 	this.componentsList = new Map();			//components map
+	
+	this.animationsList = new Map();			//animations map
 
 	/*
 	 * Read the contents of the xml file, and refer to this class for loading and error handlers.
@@ -60,10 +62,10 @@ MySceneGraph.prototype.readSceneGraphFile = function(rootElement) {
 		return;
 	}
 	
-	//The number of elements must be equal to 9
-	if(rootElement.children.length != 9)
+	//The number of elements must be equal to 10
+	if(rootElement.children.length != 10)
 	{
-		this.onXMLError("File does not have 9 children tags.");
+		this.onXMLError("File does not have 10 children tags.");
 		return;
 	}
 
@@ -141,9 +143,18 @@ MySceneGraph.prototype.readSceneGraphFile = function(rootElement) {
 		this.onXMLError(error);
 		return;
 	}
+	
+	//Parse Animations
+	if(rootElement.children[8].nodeName != "animations"){
+		console.log("WARNING : dsx does not respect the formal order!");
+	}
+	if ((error = this.parseAnimations(rootElement)) != null) {
+		this.onXMLError(error);
+		return;
+	}
 
 	//Parse Components
-	if(rootElement.children[8].nodeName != "components"){
+	if(rootElement.children[9].nodeName != "components"){
 		console.log("WARNING : dsx does not respect the formal order!");
 	}
 	if ((error = this.parseComponents(rootElement)) != null) {
@@ -822,12 +833,83 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 }
 
 /**
+ * Method that parses elements of one block () and stores information in a specific data structure ()
+ */
+MySceneGraph.prototype.parseAnimations = function(rootElement) {
+	
+	var animations_elems =  rootElement.getElementsByTagName('animations');	//ELEMENT 8
+	
+	//errors
+	if (animations_elems == null || animations_elems.length != 1) 
+	{
+		return "'animations' element is missing.";
+	}
+
+	var n_animations = animations_elems[0].children.length;	//number of animations
+
+	if(n_animations == 0)
+	{
+		return "zero 'animations' elements";
+	}
+	
+	//Each animation...
+	for(var i = 0; i < n_animations; i++)
+	{
+		var animation = animations_elems[0].children[i];
+
+		var id = this.reader.getString(animation, 'id');
+
+		//Check if the id already exists
+		if(this.animationsList.has(id))	
+		{
+			return "id "+id+" from block 'animation' already exists!";
+		}
+		
+		var deltaT = this.reader.getString(animation, 'span');
+		var type = this.reader.getString(animation, 'type');
+		
+		var anim;
+		
+		//cria a animacao de acordo com o seu tipo -> se nenhum ERRO
+		switch(type){
+			case "linear":
+			{	
+				//se linear, deve fazer uma lista de pontos de controlo
+				var list = []; 
+								
+				var n_points = animation.children.length;
+				
+				for(var j = 0; j < n_points; j++)
+				{
+					var tempPoints = new MyPoint(this.reader.getFloat(animation.children[0], 'xx'),
+												this.reader.getFloat(animation.children[0], 'yy'),
+												this.reader.getFloat(animation.children[0], 'zz'));
+					list.push(tempPoints);
+				}
+				
+				break;
+			}
+			case "circular":
+			{
+				break;
+			}
+			default:
+				return "ERROR 1 (escrever isto depois)";
+		}
+		this.animationsList.set(id,anim);	//coloca a animacao na lista
+		
+		//DEBUG
+		//this.animationsList.get(id).printInfo();
+	}
+}
+
+/**
  * Method that parses elements of one block (Components) and stores information in a specific data structure (ComponentList)
  */
 MySceneGraph.prototype.parseComponents = function(rootElement) {
 
 	//<components>
-	var components_elems =  rootElement.getElementsByTagName('components');	//ELEMENT 8 
+	var components_elems =  rootElement.getElementsByTagName('components');	//ELEMENT 9 
 	
 	//errors
 	if (components_elems == null) 

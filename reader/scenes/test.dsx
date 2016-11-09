@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+
+<dsx>
+	<scene root="sceneRoot" axis_length="3" /> 
+
+    <views default="general" >
+    		
+        <perspective id="general" near="0.1" far="500" angle="35">
+            <from x="15" y="15" z="15" />
+            <to x="0" y="0" z="0" />
+        </perspective>
+
+    </views>  
+
+    <illumination doublesided="0" local="1" >
+   
+        <ambient r="0.1" g="0.1" b="0.1" a="1" />
+        <background r="0" g="0" b="0" a="1" />					      
+    </illumination>
+
+    <lights>
+	
+        <omni id="omni_general" enabled="0" > 
+            <location x="10" y="10" z="10" w="1" />						
+            <ambient r="0" g="0" b="0" a="0" />
+            <diffuse r="0.7" g="0.7" b="0.7" a="1" />
+            <specular r="0.7" g="0.7" b="0.7" a="1" />
+        </omni>
+		
+    </lights>
+
+    <textures>
+   
+        <texture id="skyTexture" file="../resources/sky.png" length_s="0.4" length_t="0.4" />
+        <texture id="neptuneTexture" file="../resources/neptune.jpg" length_s="1" length_t="1" />
+        <texture id="earthTexture" file="../resources/earth.jpg" length_s="1" length_t="1" />
+        <texture id="saturnTexture" file="../resources/saturn.png" length_s="1" length_t="1" />
+        <texture id="saturnRingsTexture" file="../resources/saturn_rings.png" length_s="1" length_t="1" />
+        <texture id="sunTexture" file="../resources/sun.jpg" length_s="1" length_t="1" />
+        <texture id="uranusTexture" file="../resources/uranus.jpg" length_s="1" length_t="1" />
+        <texture id="jupiterTexture" file="../resources/jupiter.jpg" length_s="1" length_t="1" />
+        <texture id="marsTexture" file="../resources/mars.png" length_s="1" length_t="1" />
+        <texture id="venusTexture" file="../resources/venus.jpg" length_s="1" length_t="1" />
+        <texture id="mercuryTexture" file="../resources/mercury.png" length_s="1" length_t="1" />
+        <texture id="spaceshipTexture" file="../resources/spaceship.png" length_s="1" length_t="1" />
+        <texture id="metalTexture" file="../resources/metal.jpg" length_s="1" length_t="1" />
+		<texture id="cometHeadTexture" file="../resources/cometa.jpg" length_s="1" length_t="1" />
+		<texture id="cometTailTexture" file="../resources/cauda.jpg" length_s="0.4" length_t="0.4" />
+        
+    </textures>
+
+    <materials>
+
+        <material id="light" >
+            <emission r="1" g="1" b="1" a="1" />
+            <ambient r="1" g="1" b="1" a="1" />
+            <diffuse r="1" g="1" b="1" a="1" />
+            <specular r="1" g="1" b="1" a="1" />
+            <shininess value="100" />
+        </material>
+		
+		<material id="light2" >
+            <emission r="1" g="1" b="0" a="1" />
+            <ambient r="1" g="1" b="0" a="1" />
+            <diffuse r="1" g="1" b="0" a="1" />
+            <specular r="1" g="1" b="0" a="1" />
+            <shininess value="100" />
+        </material>
+		
+		<material id="shiny" >
+            <emission r="0" g="0" b="0" a="0" />
+            <ambient r="1" g="1" b="1" a="1" />
+            <diffuse r="1" g="1" b="1" a="1" />
+            <specular r="1" g="1" b="1" a="1" />
+            <shininess value="100" />
+        </material>
+		
+		<material id="matt1" >
+            <emission r="0" g="0" b="0" a="0" />
+            <ambient r="0.1" g="0.6" b="0.3" a="1" />
+            <diffuse r="0.1" g="0.6" b="0.3" a="1" />
+            <specular r="0.1" g="0.6" b="0.3" a="1" />
+            <shininess value="20" />
+        </material>
+		
+		<material id="matt2" >
+            <emission r="0" g="0" b="0" a="0" />
+            <ambient r="0.8" g="0.6" b="0.6" a="1" />
+            <diffuse r="0.8" g="0.6" b="0.6" a="1" />
+            <specular r="0.8" g="0.6" b="0.6" a="1" />
+            <shininess value="20" />
+        </material>
+				
+		<material id="matt3" >
+            <emission r="0" g="0" b="0" a="0" />
+            <ambient r="0.6" g="0.6" b="0.1" a="1" />
+            <diffuse r="0.6" g="0.6" b="0.1" a="1" />
+            <specular r="0.6" g="0.6" b="0.1" a="1" />
+            <shininess value="20" />
+        </material>
+        
+    </materials>
+
+    <transformations>																		
+    
+        <transformation id="solarSystemPosition">
+        	<translate x="6" y="6" z="6" />
+			<translate x="1" y="0" z="2" />
+			<scale x="0.8" y = "0.8" z="0.8" />
+        </transformation>
+
+    </transformations>
+
+    <primitives>
+		
+        <primitive id="rectangle">
+            <rectangle x1="0" y1="0" x2="1" y2="1" />				
+        </primitive>
+
+        <primitive id="triangle">
+            <triangle x1="0" y1="0" z1="0" x2="1" y2="0" z2="0" x3="0.5" y3="5" z3="0" />
+        </primitive>
+
+        <primitive id="hexCylinder">
+            <cylinder base="1" top="1" height="1" slices="6" stacks="10" />
+        </primitive>
+
+        <primitive id="cone">
+            <cylinder base="1" top="0.5" height="1" slices="6" stacks="10" />
+        </primitive>
+
+        <primitive id="sphere">
+            <sphere radius="1" slices="30" stacks="30" />
+        </primitive>
+
+        <primitive id="torus">
+            <torus inner="0.7" outer="1" slices="50" loops="50" />
+        </primitive>
+
+        <primitive id="miniTorus">
+            <torus inner="0.4" outer="0.5" slices="10" loops="10" />
+        </primitive>
+        
+    </primitives>
+	
+	<!-- novo bloco de animacao -->
+	<animations>
+		<!-- podem existir zero ou mais nós "animation" -->
+		<!-- span é o tempo, em segundos, que a animação deve -->
+		<!-- demorar. Nesta versão do formato DSX, type pode ter -->
+		<!-- o valor "linear" ou "circular"; na animacao circular -->
+		<!-- os angulos sao expressos em graus  -->
+		<animation id="animation1" span="2" type="linear">
+			<controlpoint xx="0" yy="0" zz="0" />
+			<controlpoint xx="0" yy="0" zz="6" />
+		</animation>
+
+		<animation id="animation2" span="2" type="circular" center="0 0 0" radius="3" startang="0" rotang="90" />
+	</animations>
+
+    <components>
+
+    	<component id="sceneRoot">																
+        
+            <transformation>			
+            </transformation>
+            
+			<materials>
+                <material id="light" />
+            </materials>
+            
+			<texture id="none" />
+                     
+			<children>
+				<componentref id="Stars" />
+            </children>
+            
+        </component>
+	
+        <component id="Stars">																
+        
+           <transformation>
+            </transformation>
+       
+			<materials>
+				<material id="inherit" />
+            </materials>
+                         
+			<texture id="sunTexture" />
+
+			<children>
+            	<primitiveref id = "sphere" />
+            </children>
+            
+        </component>
+                
+    </components>
+
+</dsx>
