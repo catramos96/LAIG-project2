@@ -239,7 +239,8 @@ XMLscene.prototype.displayComponents = function (component,materials,texture) {
 	this.pushMatrix();
 
 	//Transformation matrix
-	this.multMatrix(component.getTransformation(this.deltaTime).getMatrix());	//usar aqui this.deltaTime
+	this.multMatrix(component.getAnimTransformation(this.deltaTime).getMatrix());
+	this.multMatrix(component.getTransformation().getMatrix());	
 	
 	//Materials
 	//var currMaterial = component.getCurrMaterial();

@@ -39,12 +39,8 @@
 	
 	var atualPos = this.getAtualInfo(time);
 	
-	console.log("("+atualPos[0]+","+atualPos[1]+")"+" "+atualPos[2]);
-	
 	transformation.translate(atualPos[0],0,atualPos[1]);
 	transformation.rotate('y',atualPos[2]);
-	
-	console.log("Time : "+time);
 	
 	return transformation;
  }

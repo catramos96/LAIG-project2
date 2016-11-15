@@ -36,7 +36,7 @@
  	return this.id;
  }
 
- MyComponent.prototype.getTransformation = function(deltaTime)  //Transformation
+ MyComponent.prototype.getAnimTransformation = function(deltaTime)  //Transformation
  {  
 	var tempTime = 0;
 	//ciclo que percorre as animacoes para saber se este deltaTime se adequa a alguma animacao
@@ -47,15 +47,19 @@
 		{
 			var deltaAnim = deltaTime-tempTime+this.animations[i].getTime();
 			
-			var animTransf = this.animations[i].getTransformation(deltaAnim);
+			return this.animations[i].getTransformation(deltaAnim);
 			
-			//var mult; //resultado da multiplicacao da tranf atual com a transf da animacao
 			return animTransf; 
 		}
 	}
- 	return this.transformation;
+ 	return new MyTransformation("empty");
  }
 
+  MyComponent.prototype.getTransformation = function()  //Transformation
+ {  
+ 	return this.transformation;
+ }
+ 
  MyComponent.prototype.getMaterials = function(){         //List of materials
  	return this.materials;
  }
