@@ -944,7 +944,7 @@ MySceneGraph.prototype.parseAnimations = function(rootElement) {
 				var rAng = this.reader.getFloat(animation, 'rotang');
 				var tempPoint = new MyPoint(this.reader.getFloat(animation, 'centerx'),
 											this.reader.getFloat(animation, 'centery'),
-											this.reader.getFloat(animation, 'centerz')); 
+											this.reader.getFloat(animation, 'centerz'));										
 				anim = new CircularAnimation(id,deltaT,tempPoint,r,sAng,rAng);
 				break;
 			}

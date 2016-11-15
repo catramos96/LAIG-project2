@@ -181,7 +181,7 @@
 			<controlpoint xx="4" yy="0" zz="0" />
 		</animation>
 		
-		<animation id="animation3" span="3" type="circular" centerx="1" centery="1" centerz="1" radius="3" startang="0" rotang="90" />
+		<animation id="animation3" span="4" type="circular" centerx="0" centery="0" centerz="0" radius="4" startang="0" rotang="-60" />
 	</animations>
 
     <components>
@@ -230,6 +230,7 @@
 		<component id="Stars">																
         
            <transformation>
+				<scale x="0.2" y = "0.2" z="0.2" />
            </transformation>
 			
 			<!-- bloco "animation" opcional -->
@@ -246,8 +247,9 @@
 				<!-- geometricas do mesmo objeto, isso significa -->
 				<!-- que as animacoes sao afetadas pelas transformacoes -->
 				<!-- geometricas do objeto.  -->
-                <animationref id="animation1" />
+				<animationref id="animation1" />
 				<animationref id="animation2" />
+                <animationref id="animation3" />
 			</animation>
        
 			<materials>

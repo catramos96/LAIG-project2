@@ -56,4 +56,10 @@ function MyTransformation(id){
  
  }
 
+  MyTransformation.prototype.multiply = function(matrix){
+
+    mat4.multiply(this.matrix,this.matrix,matrix);
+ 
+ }
+
 
