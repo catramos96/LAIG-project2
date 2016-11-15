@@ -2,16 +2,14 @@
  * Descendent of MyAnimation
  */
  function CircularAnimation(id,time,pc,r,startAng,rotAng) {
-    this.id = id;
-	this.time = time;
+	Animation.call(this,id,time);
 	this.pc = pc;
 	this.r = r;
 	this.startAng = startAng;
 	this.rotAng = rotAng;
  }
 
- CircularAnimation.prototype = new Animation(this.id);   
- CircularAnimation.prototype.constructor = CircularAnimation;
+ CircularAnimation.prototype = Object.create(Animation.prototype);
 
  CircularAnimation.prototype.printInfo = function(){
 	 

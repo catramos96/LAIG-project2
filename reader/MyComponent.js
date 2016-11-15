@@ -36,7 +36,23 @@
  	return this.id;
  }
 
- MyComponent.prototype.getTransformation = function(){    //Transformation matrix
+ MyComponent.prototype.getTransformation = function(deltaTime)  //Transformation
+ {  
+	var tempTime = 0;
+	//ciclo que percorre as animacoes para saber se este deltaTime se adequa a alguma animacao
+	for(var i = 0; i < this.animations.length; i++)
+	{
+		tempTime += this.animations[i].getTime();
+		if(deltaTime <= tempTime)	//esta nesta animacao
+		{
+			var deltaAnim = deltaTime-tempTime+this.animations[i].getTime();
+			
+			var animTransf = this.animations[i].getTransformation(deltaAnim);
+			
+			//var mult; //resultado da multiplicacao da tranf atual com a transf da animacao
+			return animTransf; 
+		}
+	}
  	return this.transformation;
  }
 
@@ -82,6 +98,10 @@
 
  MyComponent.prototype.setPrimitives = function(p){
  	this.primitives = p;
+ }
+ 
+  MyComponent.prototype.setAnimations = function(a){
+ 	this.animations = a;
  }
 
  /*

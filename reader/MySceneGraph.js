@@ -876,7 +876,7 @@ MySceneGraph.prototype.parseAnimations = function(rootElement) {
 			return "id "+id+" from block 'animation' already exists!";
 		}
 		
-		var deltaT = this.reader.getString(animation, 'span');
+		var deltaT = this.reader.getFloat(animation, 'span');
 		var type = this.reader.getString(animation, 'type');
 		
 		var anim;
@@ -897,7 +897,7 @@ MySceneGraph.prototype.parseAnimations = function(rootElement) {
 												this.reader.getFloat(animation.children[j], 'zz'));
 					list.push(tempPoints);
 				}
-				anim = new LinearAnimation(id, deltaT, list);
+				anim = new LinearAnimation(id,deltaT,list);
 				break;
 			}
 			case "circular":
@@ -918,6 +918,7 @@ MySceneGraph.prototype.parseAnimations = function(rootElement) {
 		
 		//DEBUG
 		this.animationsList.get(id).printInfo();
+		
 	}
 }
 
@@ -962,9 +963,9 @@ MySceneGraph.prototype.parseComponents = function(rootElement) {
 			}
 	
 		//Checks the number of children (tags) inside component
-		if(component.children.length != 4)
+		if(component.children.length != 5)
 		{
-			return "The component element with id = " + id + " does not have exactly four children elements.";			
+			return "The component element with id = " + id + " does not have exactly five children elements.";			
 		}
 	
 		//<transformation>
@@ -1046,11 +1047,32 @@ MySceneGraph.prototype.parseComponents = function(rootElement) {
 			this.transformationsList.set(matrixId,transfComponent);	
 		}
 
+		//<animation>
+		var animations, n_animations, animationId;
+		var animationsComponent = [];
+		
+		animations = component.children[1];
+		 
+		n_animations = animations.children.length;
+		 
+		 //For each animationref...
+        for(var j = 0; j < n_animations;j++)
+        {
+         	animationId = this.reader.getString(animations.children[j],'id');
+			
+         	if(!this.animationsList.has(animationId))	
+			{
+				return "Component '" + id + "' animationref '" + animationId + "' not in the list of primitives";
+         	}
+         	
+         	animationsComponent.push(this.animationsList.get(animationId));
+        }
+		
 		//<materials>
 		var materials, n_materials, materialId;
 		var materialsComponent = [];
 
-		materials = component.children[1];
+		materials = component.children[2];
 
 		n_materials = materials.children.length;	//number of materials
 
@@ -1165,6 +1187,8 @@ MySceneGraph.prototype.parseComponents = function(rootElement) {
        	comp.setTexture(textureComponent);
         comp.setComponents(childComponent);
        	comp.setPrimitives(primitiveComponent);
+		
+		comp.setAnimations(animationsComponent);
        		
        	//Adds the component to the componentsList
         this.componentsList.set(id,comp);

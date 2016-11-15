@@ -28,6 +28,8 @@ XMLscene.prototype.init = function (application) {
 	//para a transparencia
 	this.gl.enable(this.gl.BLEND);
 	this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE);
+	
+	this.lastTime = -1;
 };
 
 /**
@@ -192,6 +194,18 @@ XMLscene.prototype.setDefaultAppearance = function () {
 };
 
 /**
+ *
+ */
+XMLscene.prototype.update = function(currTime) {
+	if (this.lastTime == -1)	//primeira vez
+	{
+		this.lastTime = currTime;
+		return;
+	}
+	this.deltaTime = (currTime - this.lastTime)/1000;
+}
+
+/**
  * Handler called when the graph is finally loaded. 
  * As loading is asynchronous, this may be called already after the application has started the run loop.
  * Faz as inicializacoes que requerem informacoes da leitura do parser.
@@ -220,12 +234,12 @@ XMLscene.prototype.onGraphLoaded = function () {
  * The primitives are created.
  * It calls recursivelly (the following component of its child components)
  */
-XMLscene.prototype.displayComponents = function (component, materials, texture) {
+XMLscene.prototype.displayComponents = function (component,materials,texture) {
 
 	this.pushMatrix();
 
 	//Transformation matrix
-	this.multMatrix(component.getTransformation().getMatrix());
+	this.multMatrix(component.getTransformation(this.deltaTime).getMatrix());	//usar aqui this.deltaTime
 	
 	//Materials
 	//var currMaterial = component.getCurrMaterial();
@@ -304,6 +318,8 @@ XMLscene.prototype.display = function () {
 	//it's important that things depending on the proper loading of the graph only get executed after the graph has loaded correctly
 	if (this.graph.loadedOk)
 	{
+		this.setUpdatePeriod(10);
+		
 		// Initialize Model-View matrix as identity
 		this.updateProjectionMatrix();
     	this.loadIdentity();
@@ -321,7 +337,7 @@ XMLscene.prototype.display = function () {
 		this.updateLights();
 
 		//Processes the components
-		this.displayComponents(this.graph.getRoot(), null,null);
+		this.displayComponents(this.graph.getRoot(),null,null);
 	}
 };
 

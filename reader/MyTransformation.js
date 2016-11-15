@@ -4,7 +4,7 @@
  */
 function MyTransformation(id){ 
     this.id = id;
-    this.matrix = mat4.create();  //Identidy matrix
+    this.matrix = mat4.create();  //Identity matrix
 }
 
 /**
