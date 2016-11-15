@@ -1,46 +1,62 @@
- function MyPlane(scene, data) {
-     CGFobject.call(this,scene);
-
-     this.dX = data.getDX();
-     this.dY = data.getDY();
-     this.uDivs = data.getUDivs();
-     this.vDivs = data.getVDivs();
-
-	 //MyPlane.prototype = new CGFnurbsObject(scene, null, uDivs, vDivs );
-
-     this.initBuffers();
- }
-
+function MyPlane(scene,data){
  
- MyPlane.prototype = Object.create(CGFobject.prototype);
+        CGFobject.call(this,scene);
+        this.dX = data.getDX();
+        this.dY = data.getDY();
+        this.uDivs = data.getUDivs();
+        this.vDivs = data.getVDivs(); 
 
+        this.surfaces;
 
- /**
-  * Init
-  */
- MyPlane.prototype.initBuffers = function() {
+        /*
+               -----|-----      (0,1)-  -  -  - (1,1)
+              |     |     |         |             |
+              |     |     |         |
+           -------------------      |             |
+              |     |     |         |
+              |     |     |         |             |
+               -----|-----          -------------
+                                (0,0)           (1,0)
 
-	//Properties
-    this.vertices = [];
- 	this.indices = [];
- 	this.normals = [];
- 	this.texCoords = [];
+           knots = [    0,0,
+                        1,0,
+                        1,1,
+                        0,1     
+           ]
+        */
+        this.makeSurface("0", 1, // degree on U: 2 control vertexes U
+                                         1, // degree on V: 2 control vertexes on V
+                                        [0, 1, 0, 1], // knots for U
+                                        [0, 0, 1, 1], // knots for V
+                                        [       // U = 0
+                                                [ // V = 0..1;
+                                                         [-this.dX/2, this.dY/2, 0.0, 1 ],  //(0,0)
+                                                         [-this.dX/2,  -this.dY/2, 0.0, 1 ] //(0,-1)
+                                                       
+                                                ],
+                                                // U = 1
+                                                [ // V = 0..1
+                                                         [ this.dX/2, this.dY/2, 0.0, 1 ],  //(1,0)
+                                                         [ this.dX/2,  -this.dY/2, 0.0, 1 ] //(1,-1)                                           
+                                                ]
+                                        ]
+                                );
+};
+ 
+MyPlane.prototype = Object.create(CGFobject.prototype);
+MyPlane.prototype.constructor = MyPlane;
+ 
+MyPlane.prototype.makeSurface = function (id, degree1, degree2, knots1, knots2, controlvertexes, translation) {
+               
+        var nurbsSurface = new CGFnurbsSurface(degree1, degree2, knots1, knots2, controlvertexes);
+        getSurfacePoint = function(u, v) {
+                return nurbsSurface.getPoint(u, v);
+        };
+ 
+        this.surfaces = new CGFnurbsObject(this.scene, getSurfacePoint, this.uDivs, this.vDivs);                    
+};
 
- 	for(var i = 0; i < this.vDivs+1;i++){
-
- 		for(var j = 0; i < this.uDivs+1;j++){
- 		
-			this.vertices.push(this.dX/this.uDivs*j,this.dY/this.vDivs*i);
-			this.normals.push(0,0,1);
-			//this.texCoords.push();
-
-			if(j != this.uDivs && i != this.vDivs){
-				this.indices.push(j+(this.uDivs+1*i) , j+1+(this.uDivs+1*i) , j+(this.uDivs+1*(i+1)));
-				this.indices.push(j+1+(this.uDivs+1*i) , j+(this.uDivs+1*(i+1)) , j+1+(this.uDivs+1*(i+1)));
-			}
- 		}
- 	}
-
-    this.primitiveType = this.scene.gl.TRIANGLES;
- 	this.initGLBuffers();
- };
+MyPlane.prototype.display = function ()
+{
+    this.surfaces.display();
+};

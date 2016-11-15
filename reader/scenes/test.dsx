@@ -144,7 +144,7 @@
         <!-- TESTE -->
 
         <primitive id="defaultPlane">
-            <plane dimX="1" dimY="1" partsX="4" partsY="4"/>
+            <plane dimX="2" dimY="2" partsX="4" partsY="4"/>
         </primitive>
         
     </primitives>
@@ -197,10 +197,10 @@
 			</animation>
 			
 			<materials>
-				<material id="inherit" />
+				<material id="shiny" />
             </materials>
                          
-			<texture id="sunTexture" />
+			<texture id="earthTexture" />
 
 			<children>
             	<primitiveref id = "defaultPlane" />
