@@ -20,7 +20,7 @@
 
     <lights>
 	
-        <omni id="omni_general" enabled="0" > 
+        <omni id="omni_general" enabled="1" > 
             <location x="10" y="10" z="10" w="1" />						
             <ambient r="0" g="0" b="0" a="0" />
             <diffuse r="0.7" g="0.7" b="0.7" a="1" />
@@ -46,6 +46,8 @@
         <texture id="metalTexture" file="../resources/metal.jpg" length_s="1" length_t="1" />
 		<texture id="cometHeadTexture" file="../resources/cometa.jpg" length_s="1" length_t="1" />
 		<texture id="cometTailTexture" file="../resources/cauda.jpg" length_s="0.4" length_t="0.4" />
+
+		<texture id="textureTeste" file="../resources/texture.jpg" length_s="0.4" length_t="0.4" />
         
     </textures>
 
@@ -144,7 +146,7 @@
         <!-- TESTE -->
 
         <primitive id="defaultPlane">
-            <plane dimX="2" dimY="2" partsX="4" partsY="4"/>
+            <plane dimX="2" dimY="2" partsX="10" partsY="10"/>
         </primitive>
         
     </primitives>
@@ -182,8 +184,8 @@
 			<texture id="none" />
                      
 			<children>
-				<componentref id="Stars" />
-				<!-- <componentref id="Plane" /> -->
+				<!-- <componentref id="Stars" /> -->
+				<componentref id="Plane" />
             </children>
             
         </component>
@@ -200,7 +202,7 @@
 				<material id="shiny" />
             </materials>
                          
-			<texture id="earthTexture" />
+			<texture id="textureTeste" />
 
 			<children>
             	<primitiveref id = "defaultPlane" />
