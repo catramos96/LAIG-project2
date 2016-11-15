@@ -163,8 +163,12 @@
 			<controlpoint xx="0" yy="0" zz="3" />
 			<controlpoint xx="0" yy="0" zz="0" />
 		</animation>
+		<animation id="animation2" span="3" type="linear">
+			<controlpoint xx="0" yy="0" zz="0" />
+			<controlpoint xx="4" yy="0" zz="0" />
+		</animation>
 		
-		<animation id="animation2" span="3" type="circular" centerx="1" centery="1" centerz="1" radius="3" startang="0" rotang="90" />
+		<animation id="animation3" span="3" type="circular" centerx="1" centery="1" centerz="1" radius="3" startang="0" rotang="90" />
 	</animations>
 
     <components>
@@ -230,6 +234,7 @@
 				<!-- que as animacoes sao afetadas pelas transformacoes -->
 				<!-- geometricas do objeto.  -->
                 <animationref id="animation1" />
+				<animationref id="animation2" />
 			</animation>
        
 			<materials>

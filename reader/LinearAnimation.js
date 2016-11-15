@@ -56,9 +56,7 @@
 	var position = [];
 	position[0] = this.controlPoints[0].getX();
 	position[1] = this.controlPoints[0].getZ();;
-	position[2] = -Math.pi/2;
-	
-	console.log("Dist : "+atualDist);
+	position[2] = 0;
 	
 	//encontra entre que pontos se encontra a distancia atual
 	for(var i = 0; i < this.allDistances.length; i++)
@@ -75,24 +73,24 @@
 			var b = this.controlPoints[i+1].getZ()-this.controlPoints[i].getZ();
 			
 			position[2] = Math.atan(b/a);
-			if(a == 0)
-				position[2] = -Math.atan(b/a);
-				
 			
-			position[0] -= Math.cos(position[2])*temp;
-			position[1] -= Math.sin(position[2])*temp;
-			
-			console.log(i +" : "+temp+" "+position[0]+" "+position[1]);
+			if(a == 0 || b == 0)
+			{
+				position[0] += Math.cos(position[2])*temp;
+				position[1] += Math.sin(position[2])*temp;
+			}
+			else
+			{
+				position[0] -= Math.cos(position[2])*temp;
+				position[1] -= Math.sin(position[2])*temp;
+			}
 			
 			break;
 		}
 		else
 		{
-			console.log("antes");
 			position[0] += this.controlPoints[i+1].getX()-this.controlPoints[i].getX();		//deltaX
 			position[1] += this.controlPoints[i+1].getZ()-this.controlPoints[i].getZ();		//deltaz
-			
-			console.log(i +" : "+position[0]+" "+position[1]);
 		}
 	}
 	return position;
