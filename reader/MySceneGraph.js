@@ -855,6 +855,7 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 				var x,y,z;
 				var tmp = [];
 				var controlPointsTotal = [];
+				var uValue = 0;
 
 				for(nU = 0; nU < oU+1 ; nU++){		//order U
 					tmp = [];
@@ -862,6 +863,11 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 						x = this.reader.getFloat(controlPoints[nU * (oV+1) + nV], 'x');
 						y = this.reader.getFloat(controlPoints[nU * (oV+1) + nV], 'y');
 						z = this.reader.getFloat(controlPoints[nU * (oV+1) + nV], 'z');
+		
+						if(nV != 0 && x != uValue)
+							return "ControlPoints not ordered";
+						else
+							uValue = x;
 
 						tmp.push([x,y,z,1]);
 					}
