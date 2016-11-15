@@ -161,6 +161,13 @@
 				<controlpoint x="2" y="2" z="0" />
         	 </patch>
        </primitive>
+       <primitive id="defaultBoard">
+       			<chessboard du="8" dv="8" textureref="textureTeste" su="2" sv="2">
+					   <c1 r="0" g="0" b="1" a="1" />
+					   <c2 r="1" g="1" b="1" a="1" />
+					   <cs r="1" g="0" b="0" a="1" />
+              	</chessboard>
+       </primitive>
         
     </primitives>
 	
@@ -222,7 +229,7 @@
 			<texture id="textureTeste" />
 
 			<children>
-            	<primitiveref id = "defaultPatch" />
+            	<primitiveref id = "defaultBoard" />
             </children>
             
         </component>

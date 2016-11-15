@@ -878,7 +878,35 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 				prim = new MyPatchData(id,pU,pV,oU,oV,controlPointsTotal);		//AQUI
 				break;
 			}
+			case "chessboard": {
+				var du,dv,su,sv,texture,c = [];
+
+				var du = this.reader.getFloat(primitive.children[0], 'du');
+				var dv = this.reader.getFloat(primitive.children[0], 'dv');
+				var su = this.reader.getFloat(primitive.children[0], 'su');
+				var sv = this.reader.getFloat(primitive.children[0], 'sv');
+				var texture = this.reader.getString(primitive.children[0], 'textureref');
+				
+				//carregar textura---------------------------------------------------------------
+
+				var colors = primitive.children[0].children;
+				var nc = 0;
+
+				if(colors.length != 3)
+					return "Wrong number of colors on chessboard";
+
+				for(nc = 0; nc < colors.length; nc++){
+					c.push(new MyColor(this.reader.getFloat(colors[nc], 'r'),
+							this.reader.getFloat(colors[nc], 'g'),
+							this.reader.getFloat(colors[nc], 'b'),
+							this.reader.getFloat(colors[nc], 'a')));
+				}
+
+				prim = new MyChessBoardData(id,du,dv,texture,su,sv,c[0],c[1],c[2]);
+				break;
+			}
 		}
+
 		this.primitivesList.set(id,prim);
 		
 		//DEBUG

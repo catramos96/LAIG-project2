@@ -43,6 +43,8 @@ serialInclude(['../lib/CGF.js', 'XMLscene.js',
 								'Animation.js',
 								'LinearAnimation.js',
 								'CircularAnimation.js',
+								'MyChessBoardData.js',
+								'MyChessBoard.js',
 
 main=function()
 {

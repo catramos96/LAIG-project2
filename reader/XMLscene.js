@@ -118,6 +118,9 @@ XMLscene.prototype.initPrimitives = function () {
 		else if(value instanceof MyPatchData){
 			this.primitivesInit.set(id,new MyPatch(this, value));
 		}
+		else if(value instanceof MyChessBoardData){
+			this.primitivesInit.set(id,new MyChessBoard(this, value));
+		}
 	}
 }
 
