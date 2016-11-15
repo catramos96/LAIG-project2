@@ -29,7 +29,7 @@
 	}
 	this.vel = this.totalDist/this.time;
 	
-	console.log("Total dist = "+this.totalDist + "\nVelocidade = "+this.vel);
+	//console.log("Total dist = "+this.totalDist + "\nVelocidade = "+this.vel);
 	 	 
  }
  
@@ -39,12 +39,12 @@
 	
 	var atualPos = this.getAtualInfo(time);
 	
-	console.log("("+atualPos[0]+","+atualPos[1]+")"+" "+atualPos[2]);
+	//console.log("("+atualPos[0]+","+atualPos[1]+")"+" "+atualPos[2]);
 	
 	transformation.translate(atualPos[0],0,atualPos[1]);
 	transformation.rotate('y',atualPos[2]);
 	
-	console.log("Time : "+time);
+	//console.log("Time : "+time);
 	
 	return transformation;
  }
@@ -98,8 +98,8 @@
  
  LinearAnimation.prototype.printInfo = function(){
 	 
-	console.log("Linear Transformation\n\nID : "+this.id+ "\nTime : "+this.time);
-	console.log("Control Points :\n");
+	//console.log("Linear Transformation\n\nID : "+this.id+ "\nTime : "+this.time);
+	//console.log("Control Points :\n");
 	for(var i = 0; i < this.controlPoints.length; i++){
 		this.controlPoints[i].printInfo();
 	}

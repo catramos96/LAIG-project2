@@ -835,6 +835,43 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 				prim = new MyPlaneData(id,dx,dy,u,v);
 				break;
 			}
+			case "patch" : {
+				var oU,oV,pU,pV;
+
+				oU = this.reader.getFloat(primitive.children[0], 'orderU');
+				oV = this.reader.getFloat(primitive.children[0], 'orderV');
+				pU = this.reader.getFloat(primitive.children[0], 'partsU');
+				pV = this.reader.getFloat(primitive.children[0], 'partsV');
+				
+				var n_children = (oU + 1) * (oV + 1);
+				var controlPoints = primitive.children[0].children;
+
+				/*if(primitive.children[i].children.length)*/
+				if(controlPoints.length != n_children){
+					return controlPoints.length + " for " + oU + "uKnots and " + oV + " vKnots";
+				}
+
+				var nU,nV;
+				var x,y,z;
+				var tmp = [];
+				var controlPointsTotal = [];
+
+				for(nU = 0; nU < oU+1 ; nU++){		//order U
+					tmp = [];
+					for(nV = 0; nV < oV+1 ; nV++){	//order V
+						x = this.reader.getFloat(controlPoints[nU * (oV+1) + nV], 'x');
+						y = this.reader.getFloat(controlPoints[nU * (oV+1) + nV], 'y');
+						z = this.reader.getFloat(controlPoints[nU * (oV+1) + nV], 'z');
+
+						tmp.push([x,y,z,1]);
+					}
+					controlPointsTotal.push(tmp);
+				}
+				
+				//console.log(controlPointsTotal);
+				prim = new MyPatchData(id,pU,pV,oU,oV,controlPointsTotal);		//AQUI
+				break;
+			}
 		}
 		this.primitivesList.set(id,prim);
 		
@@ -1022,20 +1059,20 @@ MySceneGraph.prototype.parseComponents = function(rootElement) {
 						transfComponent.translate(this.reader.getFloat(transformation.children[j],'x'),
 										  			this.reader.getFloat(transformation.children[j],'y'),
 										  			this.reader.getFloat(transformation.children[j],'z'));
-						console.log("translate - " + transfComponent.getMatrix());
+						//console.log("translate - " + transfComponent.getMatrix());
 						break;
 					}
 					case "rotate":{
 						transfComponent.rotate(this.reader.getString(transformation.children[j],'axis'),
 						this.reader.getFloat(transformation.children[j],'angle')*Math.PI*2/360);
-						console.log("rotate - " + transfComponent.getMatrix());
+						//console.log("rotate - " + transfComponent.getMatrix());
 						break;
 					}
 					case "scale":{
 						transfComponent.scale(this.reader.getFloat(transformation.children[j],'x'),
 										  			this.reader.getFloat(transformation.children[j],'y'),
 										  			this.reader.getFloat(transformation.children[j],'z'));
-						console.log(transfComponent.getMatrix());
+						//console.log(transfComponent.getMatrix());
 						break;
 					}
 				

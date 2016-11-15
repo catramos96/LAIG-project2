@@ -115,6 +115,9 @@ XMLscene.prototype.initPrimitives = function () {
 		else if(value instanceof MyPlaneData){
 			this.primitivesInit.set(id,new MyPlane(this, value));
 		}
+		else if(value instanceof MyPatchData){
+			this.primitivesInit.set(id,new MyPatch(this, value));
+		}
 	}
 }
 

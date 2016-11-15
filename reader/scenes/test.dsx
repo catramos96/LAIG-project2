@@ -148,6 +148,19 @@
         <primitive id="defaultPlane">
             <plane dimX="2" dimY="2" partsX="10" partsY="10"/>
         </primitive>
+        <primitive id="defaultPatch">
+        	<patch orderU="2" orderV="2" partsU="4" partsV="4" >    
+				<controlpoint x="0" y="0" z="0" />
+				<controlpoint x="0" y="1" z="1.5" />
+				<controlpoint x="0" y="2" z="0" />
+				<controlpoint x="1" y="0" z="1.5" />
+				<controlpoint x="1" y="1" z="3" />
+				<controlpoint x="1" y="2" z="1.5" />
+				<controlpoint x="2" y="0" z="0" />
+				<controlpoint x="2" y="1" z="1.5" />
+				<controlpoint x="2" y="2" z="0" />
+        	 </patch>
+       </primitive>
         
     </primitives>
 	
@@ -209,7 +222,7 @@
 			<texture id="textureTeste" />
 
 			<children>
-            	<primitiveref id = "defaultPlane" />
+            	<primitiveref id = "defaultPatch" />
             </children>
             
         </component>

@@ -1,8 +1,10 @@
- function MyPatchData(id,func, uDivs, vDivs) {
+ function MyPatchData(id, uDivs, vDivs,uOrder,vOrder,controlPoints) {
      this.id = id;
-     this.func = func;
      this.uDivs = uDivs;
      this.vDivs = vDivs;
+     this.uOrder = uOrder;
+     this.vOrder = vOrder;
+     this.controlPoints = controlPoints;
  }
 
  MyPatchData.prototype = new MyPrimitive(this.id); 
@@ -21,9 +23,19 @@
  }
 
  MyPatchData.prototype.getUDivs = function(){
-     return this.UDivs;
+     return this.uDivs;
  }
 
  MyPatchData.prototype.getVDivs = function(){
-     return this.VDivs;
+     return this.vDivs;
+ }
+  MyPatchData.prototype.getUOrder = function(){
+     return this.uOrder;
+ }
+
+ MyPatchData.prototype.getVOrder = function(){
+     return this.vOrder;
+ }
+  MyPatchData.prototype.getControlPoints = function(){
+     return this.controlPoints;
  }
