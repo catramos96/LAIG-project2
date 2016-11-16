@@ -12,9 +12,9 @@ function MyChessBoard(scene, data) {
 	this.c3 = data.getC3();	//cor de peão selecionada
 
 	this.plane = new MyPlane(this.scene,new MyPlaneData("plane",1,1,this.dU,this.dV));
-	this.shader = new CGFshader(this.scene.gl, "shaders/flat.frag", "shaders/flat.vert");
-	/*this.shader.setUniformsValues({uSampler2: 1});
-		console.log("APOS INIT");*/
+	this.shader = new CGFshader(this.scene.gl, "shaders/board.vert", "shaders/board.frag");
+	this.shader.setUniformsValues({uSampler2: 1});
+		console.log("APOS INIT");
 	//this.shader.setLineMode();
  }
 
@@ -29,6 +29,5 @@ function MyChessBoard(scene, data) {
 
   MyChessBoard.prototype.display= function() {
   	this.scene.setActiveShader(this.shader);
-  	//this.texture.bind(0);
 	this.plane.display();
   };

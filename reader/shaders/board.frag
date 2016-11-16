@@ -24,6 +24,5 @@ varying vec2 vTextureCoord;
 uniform sampler2D uSampler;
 
 void main() {
-		gl_FragColor =  vec4(0.6,0.6,0.9, 1.0) * uLight[0].diffuse;
 		gl_FragColor =  texture2D(uSampler,vTextureCoord);
 }
