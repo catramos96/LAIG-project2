@@ -21,8 +21,25 @@ struct lightProperties {
 uniform lightProperties uLight[NUMBER_OF_LIGHTS];
 
 varying vec2 vTextureCoord;
+varying vec4 coords;
+
 uniform sampler2D uSampler;
+uniform float du;
+uniform float dv;
+uniform vec4 c1;
+uniform vec4 c2;
+uniform vec4 c3;
 
 void main() {
-		gl_FragColor =  texture2D(uSampler,vTextureCoord);
+		
+		vec4 color = texture2D(uSampler,vTextureCoord);
+		float coordx = -0.5;
+
+		if(coords.x+0.5 < 0.5)
+			color *= c1;
+		else
+			color *= c2;
+
+
+		gl_FragColor = color;
 }
