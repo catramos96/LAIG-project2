@@ -3,10 +3,12 @@ function MyPlane(scene,data){
         this.dX = data.getDX();
         this.dY = data.getDY();
         this.uDivs = data.getUDivs();
-        this.vDivs = data.getVDivs(); 
+        this.vDivs = data.getVDivs();
+
+      
 
         this.surfaces;
-       this.init();                            
+        this.init();                            
 };
  
 MyPlane.prototype = Object.create(CGFobject.prototype);
@@ -35,7 +37,6 @@ MyPlane.prototype.init = function (){
         };
  
         this.surfaces = new CGFnurbsObject(this.scene, getSurfacePoint, this.uDivs, this.vDivs);  
-        
 };
 
 MyPlane.prototype.display = function ()

@@ -9,18 +9,12 @@ function MyChessBoard(scene, data) {
 	this.texture = data.getTexture();
 	this.c1 = data.getC1();	//cor primaria
 	this.c2 = data.getC2();	//cor secundaria
-	this.c3 = data.getC3();	//cor de peão selecionado
-
-	console.log(this.dU); 
-	console.log(this.dV);
-	console.log(this.sU);
-	console.log(this.sV);
-	console.log(this.texture);
-	console.log(this.c1);
-	console.log(this.c2);
-	console.log(this.c3);
+	this.c3 = data.getC3();	//cor de peão selecionada
 
 	this.plane = new MyPlane(this.scene,new MyPlaneData("plane",1,1,this.dU,this.dV));
+	this.shader = new CGFshader(this.scene.gl, "../lib/CGFshaders/board.frag");
+
+	this.init();
  }
 
  
@@ -32,8 +26,13 @@ function MyChessBoard(scene, data) {
 		return this.texture;
   };
 
+ MyChessBoard.prototype.init= function() {
+		return this.texture;
+ };
+
   MyChessBoard.prototype.display= function() {
   	this.scene.pushMatrix();
+  		//this.scene.setActiveShader(this.shader);
 		this.plane.display();
 	this.scene.popMatrix();
   };
