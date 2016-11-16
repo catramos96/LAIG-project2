@@ -7,6 +7,8 @@
      this.materialIndex = 0;    //Index of the material in use
      this.materials = [];       //List of materials
      this.components = [];      //Children components
+     
+     this.animTransformation = new MyTransformation("anim");
  }
 
  /**
@@ -38,19 +40,20 @@
 
  MyComponent.prototype.getAnimTransformation = function(deltaTime)  //Transformation
  {  
-	var tempTime = 0;
-	//ciclo que percorre as animacoes para saber se este deltaTime se adequa a alguma animacao
-	for(var i = 0; i < this.animations.length; i++)
+    var tempTime = 0;
+   
+    //ciclo que percorre as animacoes para saber se este deltaTime se adequa a alguma animacao
+    for(var i = 0; i < this.animations.length; i++)
+    {
+	tempTime += this.animations[i].getTime();
+	if(deltaTime <= tempTime)	//esta nesta animacao
 	{
-		tempTime += this.animations[i].getTime();
-		if(deltaTime <= tempTime)	//esta nesta animacao
-		{
-			var deltaAnim = deltaTime-tempTime+this.animations[i].getTime();
-			
-			return this.animations[i].getTransformation(deltaAnim);
-		}
+	    var deltaAnim = deltaTime-tempTime+this.animations[i].getTime();	
+	    this.animTransformation = this.animations[i].getTransformation(deltaAnim);
+	    break;
 	}
- 	return new MyTransformation("empty");
+    }
+    return this.animTransformation;
  }
 
   MyComponent.prototype.getTransformation = function()  //Transformation
