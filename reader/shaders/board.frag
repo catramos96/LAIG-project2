@@ -35,10 +35,12 @@ void main() {
 		vec4 color = texture2D(uSampler,vTextureCoord);
 		float coordx = -0.5;
 
-		if(coords.x+0.5 < 0.5)
+		if(mod(vTextureCoord.s,2.0/du) > 1.0/du && mod(vTextureCoord.t,2.0/dv) > 1.0/dv)
+			color *= c1;
+		else if(mod(vTextureCoord.s,2.0/du) < 1.0/du && mod(vTextureCoord.t,2.0/dv) < 1.0/dv)
 			color *= c1;
 		else
-			color *= c2;
+			color *=c2;
 
 
 		gl_FragColor = color;
