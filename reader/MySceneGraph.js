@@ -878,7 +878,40 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 				prim = new MyPatchData(id,pU,pV,oU,oV,controlPointsTotal);		//AQUI
 				break;
 			}
+			case "chessboard": {
+				var du,dv,su,sv,texture,c = [];
+
+				var du = this.reader.getFloat(primitive.children[0], 'du');
+				var dv = this.reader.getFloat(primitive.children[0], 'dv');
+				var su = this.reader.getFloat(primitive.children[0], 'su');
+				var sv = this.reader.getFloat(primitive.children[0], 'sv');
+				var t = this.reader.getString(primitive.children[0], 'textureref');
+				var texture;
+
+				//If the texture id doesn't exists (can be an error, "inherit" or "none")
+				if(!this.texturesList.has(t))
+					return "Texture does not exist for chessboard";
+				else
+					texture = this.texturesList.get(t);
+
+				var colors = primitive.children[0].children;
+				var nc = 0;
+
+				if(colors.length != 3)
+					return "Wrong number of colors on chessboard";
+
+				for(nc = 0; nc < colors.length; nc++){
+					c.push(new MyColor(this.reader.getFloat(colors[nc], 'r'),
+							this.reader.getFloat(colors[nc], 'g'),
+							this.reader.getFloat(colors[nc], 'b'),
+							this.reader.getFloat(colors[nc], 'a')));
+				}
+				
+				prim = new MyChessBoardData(id,du,dv,texture,su,sv,c[0],c[1],c[2]);
+				break;
+			}
 		}
+
 		this.primitivesList.set(id,prim);
 		
 		//DEBUG
@@ -1006,9 +1039,9 @@ MySceneGraph.prototype.parseComponents = function(rootElement) {
 			}
 	
 		//Checks the number of children (tags) inside component
-		if(component.children.length != 4)
+		if(component.children.length != 4 && component.children.length != 5)
 		{
-			return "The component element with id = " + id + " does not have exactly four children elements.";			
+			return "The component element with id = " + id + " does not have four or five children elements.";			
 		}
 	
 		//<transformation>
@@ -1099,12 +1132,12 @@ MySceneGraph.prototype.parseComponents = function(rootElement) {
 		animations = component.getElementsByTagName("animation");
 		if(animations.length != 0)
 		{
-		    n_animations = animations.children.length;
+		    n_animations = animations[0].children.length;
 		 
 		    //For each animationref...
 		    for(var j = 0; j < n_animations;j++)
 		    {
-			animationId = this.reader.getString(animations.children[j],'id');
+			animationId = this.reader.getString(animations[0].children[j],'id');
 			
 			if(!this.animationsList.has(animationId))	
 			{

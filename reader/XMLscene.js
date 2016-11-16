@@ -118,6 +118,9 @@ XMLscene.prototype.initPrimitives = function () {
 		else if(value instanceof MyPatchData){
 			this.primitivesInit.set(id,new MyPatch(this, value));
 		}
+		else if(value instanceof MyChessBoardData){
+			this.primitivesInit.set(id,new MyChessBoard(this, value));
+		}
 	}
 }
 
@@ -296,8 +299,15 @@ XMLscene.prototype.displayComponents = function (component,materials,texture) {
 		 primInit.display();
 	    }
 	    else if(this.primitivesInit.has(prim.getId())){
-		primInit = this.primitivesInit.get(prim.getId());	//objeto com a primtiva    
-		 primInit.display();
+		primInit = this.primitivesInit.get(prim.getId());	//objeto com a primtiva  
+		
+		if(primInit instanceof MyChessBoard)
+		{
+		    textAppearance = primInit.getTexture().getAppearance();
+		    appearance.setTexture(textAppearance);
+		    appearance.apply();
+		}
+		primInit.display();
 	    }
 	}
 
