@@ -96,14 +96,8 @@ XMLscene.prototype.initPrimitives = function () {
 	this.primitivesInit = new Map();
 	
 	for (var [id, value] of this.graph.primitivesList) 
-	{
-		if(value instanceof MyRectangleData){
-			this.primitivesInit.set(id,new MyRectangle(this, value,1,1));
-		}	
-		else if(value instanceof MyTriangleData){
-			this.primitivesInit.set(id,new MyTriangle(this, value,1,1));
-		}	
-		else if(value instanceof MyCylinderData){
+	{	
+		if(value instanceof MyCylinderData){
 			this.primitivesInit.set(id,new MyCylinder(this, value));
 		}
 		else if(value instanceof MySphereData){
@@ -182,7 +176,7 @@ XMLscene.prototype.updateCamera = function () {
  * Also updates the color values interpreted by the parser.
  */
 XMLscene.prototype.setDefaultAppearance = function () {
-	this.setAmbient(0.2, 0.4, 0.8, 1.0);
+    this.setAmbient(0.2, 0.4, 0.8, 1.0);
     this.setDiffuse(0.2, 0.4, 0.8, 1.0);
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
@@ -245,8 +239,8 @@ XMLscene.prototype.displayComponents = function (component,materials,texture) {
 	this.pushMatrix();
 
 	//Transformation matrix
+	this.multMatrix(component.getTransformation().getMatrix());
 	this.multMatrix(component.getAnimTransformation(this.deltaTime).getMatrix());
-	this.multMatrix(component.getTransformation().getMatrix());	
 	
 	//Materials
 	//var currMaterial = component.getCurrMaterial();
@@ -287,28 +281,28 @@ XMLscene.prototype.displayComponents = function (component,materials,texture) {
 	var primitives = component.getPrimitives();
 	for (var i = 0; i < primitives.length; i++)
 	{
-		var prim = primitives[i];
+	    var prim = primitives[i];	//informacoes sobre a primitiva (data)
+	    var primInit = null;
+	  
+	    if(prim instanceof MyRectangleData){
+		primInit = new MyRectangle(this,prim,lS,lT);
+		 primInit.display();
+	    }
+	    else if(prim instanceof MyTriangleData){
+		primInit = new MyTriangle(this,prim,lS,lT);
+		 primInit.display();
+	    }
+	    else if(this.primitivesInit.has(prim.getId())){
+		primInit = this.primitivesInit.get(prim.getId());	//objeto com a primtiva  
 		
-		if(this.primitivesInit.has(prim.getId()))
+		if(primInit instanceof MyChessBoard)
 		{
-			var primInit = this.primitivesInit.get(prim.getId());
-			
-			if(primInit instanceof MyRectangle)
-				primInit.setTextureLength(ls,lt);	
-			else if(primInit instanceof MyTriangle)
-				primInit.setTextureLength(ls,lt);
-			
-			if(primInit instanceof MyChessBoard){
-				textAppearance = primInit.getTexture().getAppearance();
-				appearance.setTexture(textAppearance);
-			//	appearance.apply();
-				
-			}
-				
-		
-			primInit.display();
-
+		    textAppearance = primInit.getTexture().getAppearance();
+		    appearance.setTexture(textAppearance);
+		    appearance.apply();
 		}
+		primInit.display();
+	    }
 	}
 
 	//next child component

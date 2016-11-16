@@ -27,7 +27,7 @@
 	
 	var angAtual = this.vel*deltTime/this.r; //angulo da distancia percorrida ate agora
 	
-	transformation.translate(this.pc.getX(),0,this.pc.getZ());
+	transformation.translate(this.pc.getX(),this.pc.getY(),this.pc.getZ());
 	transformation.rotate('y',(angAtual+this.startAng));
 	transformation.translate(this.r,0,0);
 	transformation.translate(-this.pc.getX(),0,-this.pc.getZ());
