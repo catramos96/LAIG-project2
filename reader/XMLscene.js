@@ -291,12 +291,20 @@ XMLscene.prototype.displayComponents = function (component,materials,texture) {
 		
 		if(this.primitivesInit.has(prim.getId()))
 		{
+			console.log(prim);
 			var primInit = this.primitivesInit.get(prim.getId());
 			
 			if(prim instanceof MyRectangle)
 				primInit.setTextureLength(ls,lt);	
 			else if(prim instanceof MyTriangle)
 				primInit.setTextureLength(ls,lt);
+			
+			if(primInit instanceof MyChessBoard){
+				textAppearance = primInit.getTexture().getAppearance();
+				appearance.setTexture(textAppearance);
+				appearance.apply();
+			}
+				
 		
 			primInit.display();
 		}

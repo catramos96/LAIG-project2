@@ -1,5 +1,6 @@
 function MyChessBoard(scene, data) {
      CGFobject.call(this,scene);
+
 	this.scene = scene;
     this.dU = data.getDU();	//dimensões
     this.dV = data.getDV();	//dimensões
@@ -10,7 +11,7 @@ function MyChessBoard(scene, data) {
 	this.c2 = data.getC2();	//cor secundaria
 	this.c3 = data.getC3();	//cor de peão selecionado
 
-	console.log(this.dU);
+	console.log(this.dU); 
 	console.log(this.dV);
 	console.log(this.sU);
 	console.log(this.sV);
@@ -19,16 +20,20 @@ function MyChessBoard(scene, data) {
 	console.log(this.c2);
 	console.log(this.c3);
 
-	this.plane = new MyPlane(this.scene,new MyPlaneData("ex",1,1,this.dU,this.dV));
-
-	//aplicar texturas etc ...
+	this.plane = new MyPlane(this.scene,new MyPlaneData("plane",1,1,this.dU,this.dV));
  }
 
  
  MyChessBoard.prototype = Object.create(CGFobject.prototype);
  MyChessBoard.prototype.constructor = MyChessBoard;
 
+
+ MyChessBoard.prototype.getTexture= function() {
+		return this.texture;
+  };
+
   MyChessBoard.prototype.display= function() {
-  //	console.log("DISPLAY");
-  	this.plane.display();
+  	this.scene.pushMatrix();
+		this.plane.display();
+	this.scene.popMatrix();
   };

@@ -885,9 +885,14 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 				var dv = this.reader.getFloat(primitive.children[0], 'dv');
 				var su = this.reader.getFloat(primitive.children[0], 'su');
 				var sv = this.reader.getFloat(primitive.children[0], 'sv');
-				var texture = this.reader.getString(primitive.children[0], 'textureref');
-				
-				//carregar textura---------------------------------------------------------------
+				var t = this.reader.getString(primitive.children[0], 'textureref');
+				var texture;
+
+				//If the texture id doesn't exists (can be an error, "inherit" or "none")
+				if(!this.texturesList.has(t))
+					return "Texture does not exist for chessboard";
+				else
+					texture = this.texturesList.get(t);
 
 				var colors = primitive.children[0].children;
 				var nc = 0;
@@ -901,7 +906,7 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 							this.reader.getFloat(colors[nc], 'b'),
 							this.reader.getFloat(colors[nc], 'a')));
 				}
-
+				
 				prim = new MyChessBoardData(id,du,dv,texture,su,sv,c[0],c[1],c[2]);
 				break;
 			}

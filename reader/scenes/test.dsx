@@ -226,7 +226,7 @@
 				<material id="shiny" />
             </materials>
                          
-			<texture id="textureTeste" />
+			<texture id="none" />
 
 			<children>
             	<primitiveref id = "defaultBoard" />
