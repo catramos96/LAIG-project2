@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-16" standalone="yes"?>
 
 <dsx>
-	<scene root="sceneRoot" axis_length="3" /> 
-
+  
+    <scene root="sceneRoot" axis_length="3" /> 
+  
     <views default="general" >
-    		
-        <perspective id="general" near="0.1" far="500" angle="35">
+	<perspective id="general" near="0.1" far="500" angle="35">
             <from x="15" y="15" z="15" />
             <to x="0" y="0" z="0" />
         </perspective>
@@ -14,44 +14,41 @@
             <from x="6" y="20" z="10" />
             <to x="6" y="6" z="6" />
         </perspective>
-		
-		<perspective id="from_down" near="0.1" far="500" angle="70">
+	
+	<perspective id="from_down" near="0.1" far="500" angle="70">
             <from x="0" y="0" z="0" />
             <to x="15" y="15" z="15" />     
         </perspective>
 		
-		<perspective id="ship_details" near="0.1" far="500" angle="30">
+	<perspective id="ship_details" near="0.1" far="500" angle="30">
             <from x="3" y="6" z="6" />
             <to x="4" y="7" z="10" />     
         </perspective>
 		
-		<perspective id="saturn_details" near="0.1" far="500" angle="30">
+	<perspective id="saturn_details" near="0.1" far="500" angle="30">
             <from x="9" y="10" z="3" />
             <to x="7" y="6" z="2" />     
         </perspective>
 
-		<perspective id="comets_details" near="0.1" far="500" angle="30">
+	<perspective id="comets_details" near="0.1" far="500" angle="30">
             <from x="3" y="8" z="8" />
             <to x="3" y="7" z="6" />     
         </perspective>
-
     </views>  
 
     <illumination doublesided="0" local="1" >
-   
         <ambient r="0.1" g="0.1" b="0.1" a="1" />
         <background r="0" g="0" b="0" a="1" />					      
     </illumination>
 
     <lights>
-	
         <omni id="omni_general" enabled="0" > 
             <location x="30" y="30" z="30" w="1" />						
             <ambient r="0" g="0" b="0" a="0" />
             <diffuse r="0.7" g="0.7" b="0.7" a="1" />
             <specular r="0.7" g="0.7" b="0.7" a="1" />
         </omni>
-		
+	
         <spot id="spot_earth" enabled="1" angle="60" exponent="3">
             <target x="10" y="6" z="8" />
             <location x="11" y="7" z="11" />
@@ -59,27 +56,25 @@
             <diffuse r="0.7" g="0.7" b="0.7" a="1" />
             <specular r="0.2" g="0.2" b="0.2" a="1" />
         </spot>
-		
-		<spot id="spot_zero" enabled="1" angle="60" exponent="6">
+
+	<spot id="spot_zero" enabled="1" angle="60" exponent="6">
             <target x="6" y="6" z="6" />
             <location x="0" y="0" z="0" />
             <ambient r="0.2" g="0.2" b="0.2" a="1" />
             <diffuse r="0.6" g="0.6" b="0.6" a="1" />
             <specular r="0.6" g="0.6" b="0.6" a="1" />
         </spot>
-		
-		<spot id="spot_ship" enabled="1" angle="60" exponent="8">
+
+	<spot id="spot_ship" enabled="1" angle="60" exponent="8">
             <target x="4" y="7" z="10" />
             <location x="4" y="9" z="12" />
             <ambient r="0.2" g="0.2" b="0.2" a="1" />
             <diffuse r="1" g="1" b="1" a="1" />
             <specular r="0.6" g="0.6" b="0.6" a="1" />
         </spot>
-		
     </lights>
 
     <textures>
-   
         <texture id="skyTexture" file="../resources/sky.png" length_s="0.4" length_t="0.4" />
         <texture id="neptuneTexture" file="../resources/neptune.jpg" length_s="1" length_t="1" />
         <texture id="earthTexture" file="../resources/earth.jpg" length_s="1" length_t="1" />
@@ -93,13 +88,11 @@
         <texture id="mercuryTexture" file="../resources/mercury.png" length_s="1" length_t="1" />
         <texture id="spaceshipTexture" file="../resources/spaceship.png" length_s="1" length_t="1" />
         <texture id="metalTexture" file="../resources/metal.jpg" length_s="1" length_t="1" />
-		<texture id="cometHeadTexture" file="../resources/cometa.jpg" length_s="1" length_t="1" />
-		<texture id="cometTailTexture" file="../resources/cauda.jpg" length_s="0.4" length_t="0.4" />
-        
+	<texture id="cometHeadTexture" file="../resources/cometa.jpg" length_s="1" length_t="1" />
+	<texture id="cometTailTexture" file="../resources/cauda.jpg" length_s="0.4" length_t="0.4" />      
     </textures>
 
     <materials>
-
         <material id="light" >
             <emission r="1" g="1" b="1" a="1" />
             <ambient r="1" g="1" b="1" a="1" />
@@ -107,8 +100,8 @@
             <specular r="1" g="1" b="1" a="1" />
             <shininess value="100" />
         </material>
-		
-		<material id="light2" >
+	
+	<material id="light2" >
             <emission r="1" g="1" b="0" a="1" />
             <ambient r="1" g="1" b="0" a="1" />
             <diffuse r="1" g="1" b="0" a="1" />
@@ -116,7 +109,7 @@
             <shininess value="100" />
         </material>
 		
-		<material id="shiny" >
+	<material id="shiny" >
             <emission r="0" g="0" b="0" a="0" />
             <ambient r="1" g="1" b="1" a="1" />
             <diffuse r="1" g="1" b="1" a="1" />
@@ -124,7 +117,7 @@
             <shininess value="100" />
         </material>
 		
-		<material id="matt1" >
+	<material id="matt1" >
             <emission r="0" g="0" b="0" a="0" />
             <ambient r="0.1" g="0.6" b="0.3" a="1" />
             <diffuse r="0.1" g="0.6" b="0.3" a="1" />
@@ -132,7 +125,7 @@
             <shininess value="20" />
         </material>
 		
-		<material id="matt2" >
+	<material id="matt2" >
             <emission r="0" g="0" b="0" a="0" />
             <ambient r="0.8" g="0.6" b="0.6" a="1" />
             <diffuse r="0.8" g="0.6" b="0.6" a="1" />
@@ -140,28 +133,24 @@
             <shininess value="20" />
         </material>
 				
-		<material id="matt3" >
+	<material id="matt3" >
             <emission r="0" g="0" b="0" a="0" />
             <ambient r="0.6" g="0.6" b="0.1" a="1" />
             <diffuse r="0.6" g="0.6" b="0.1" a="1" />
             <specular r="0.6" g="0.6" b="0.1" a="1" />
             <shininess value="20" />
-        </material>
-        
+        </material>   
     </materials>
 
-    <transformations>																		
-    
-        <transformation id="solarSystemPosition">
-        	<translate x="6" y="6" z="6" />
-			<translate x="1" y="0" z="2" />
-			<scale x="0.8" y = "0.8" z="0.8" />
+    <transformations>
+	<transformation id="solarSystemPosition">
+	    <translate x="6" y="6" z="6" />
+	    <translate x="1" y="0" z="2" />
+	    <scale x="0.8" y = "0.8" z="0.8" />
         </transformation>
-
     </transformations>
 
     <primitives>
-		
         <primitive id="rectangle">
             <rectangle x1="0" y1="0" x2="1" y2="1" />				
         </primitive>
@@ -189,78 +178,80 @@
         <primitive id="miniTorus">
             <torus inner="0.4" outer="0.5" slices="10" loops="10" />
         </primitive>
-        
     </primitives>
 
     <!-- novo bloco de animacao -->
-	<animations>
-		<!-- podem existir zero ou mais nós "animation" -->
-		<!-- span é o tempo, em segundos, que a animação deve -->
-		<!-- demorar. Nesta versão do formato DSX, type pode ter -->
-		<!-- o valor "linear" ou "circular"; na animacao circular -->
-		<!-- os angulos sao expressos em graus  -->
-		<animation id="animation1" span="3" type="linear">
-			<controlpoint xx="4" yy="0" zz="0" />
-			<controlpoint xx="0" yy="0" zz="3" />
-			<controlpoint xx="0" yy="0" zz="0" />
-		</animation>
-		<!-- <animation id="animation2" span="3" type="linear">
-			<controlpoint xx="0" yy="0" zz="0" />
-			<controlpoint xx="4" yy="0" zz="0" />
-		</animation>
-		
-		<animation id="animation3" span="4" type="circular" centerx="0" centery="0" centerz="0" radius="4" startang="0" rotang="-60" /> -->
-	</animations>
-
+    <animations>
+	<!-- podem existir zero ou mais nós "animation" -->
+	<!-- span é o tempo, em segundos, que a animação deve -->
+	<!-- demorar. Nesta versão do formato DSX, type pode ter -->
+	<!-- o valor "linear" ou "circular"; na animacao circular -->
+	<!-- os angulos sao expressos em graus  -->
+	<animation id="animationComets" span="6" type="linear">
+	    <controlpoint xx="0" yy="0" zz="0" />
+	    <controlpoint xx="-3" yy="0" zz="3" />
+	</animation>
+	
+	<animation id="animationSun" span="6" type="circular" centerx="0" centery="0" centerz="0" radius="0.01" startang="0" rotang="360" /> -->
     
-    <components>
+    	<animation id="animationShip1" span="2" type="linear">
+	    <controlpoint xx="0" yy="0" zz="0" />
+	    <controlpoint xx="2" yy="0" zz="0" />
+	</animation>
+	
+	<animation id="animationShip2" span="4" type="circular" centerx="0" centery="0" centerz="0" radius="2" startang="0" rotang="-25" /> -->
+    
+    </animations>
 
-    	<component id="sceneRoot">																
-        
-            <transformation>			
-            </transformation>
+    <components>
+	<component id="sceneRoot">
+	  
+	<transformation>
+        </transformation>
             
-			<materials>
-                <material id="shiny" />
-            </materials>
+	<materials>
+	    <material id="shiny" />
+        </materials>
             
-			<texture id="none" />
+	<texture id="none" />
                      
-			<children>
-				<componentref id="Space" />
-				<componentref id="Spaceships" />
-				<componentref id="Planets" />
-				<componentref id="Stars" />
-				<componentref id="Comets" />
-            </children>
-            
-        </component>
-		
-		<!-- Comets -->
-		
-		<component id="Comets">
-		
-			<transformation>	
-				<translate x="3" y ="7" z ="6"/>
-            </transformation>
+	<children>
+	    <componentref id="Space" />
+	    <componentref id="Spaceships" />
+	    <componentref id="Planets" />
+	    <componentref id="Stars" />
+	    <componentref id="Comets" />
+        </children>   
+    </component>
+    
+    <!-- Comets -->
+    <component id="Comets">
+      
+      <transformation>	
+	<translate x="3" y ="7" z ="6"/>
+      </transformation>
+      
+      <animation>
+	<animationref id="animationComets"/>
+	</animation>
 			
-			<materials>
-                <material id="light" />
-            </materials>
+	<materials>
+           <material id="light" />
+         </materials>
 			
-			<texture id="none" />
+	<texture id="none" />
 		
-			<children>
-				<componentref id="Comet1" />
-				<componentref id="Comet2" />
-				<componentref id="Comet3" />
+	<children>
+		<componentref id="Comet1" />
+		<componentref id="Comet2" />
+		<componentref id="Comet3" />
             </children>
-		
-		</component>
+
+	    </component>
 		
 		<component id="Comet1">
 		
-			<transformation>	
+	<transformation>	
             </transformation>
 			
 			<materials>
@@ -544,13 +535,17 @@
             
         </component>
 		
-		<!-- Spaceship -->
+	<!-- Spaceship -->
 
         <component id="Spaceships">																
         
             <transformation>    	
             </transformation>
-       
+	    
+	    <animation>
+	      <animationref id="animationShip1"/>
+	      <animationref id="animationShip2"/>
+	    </animation>
 			<materials>
 				<material id="shiny" />
 				<material id="matt1" />
@@ -989,23 +984,27 @@
             
         </component> 
 		
-		<!-- Stars -->
+	<!-- Stars -->
 
         <component id="Stars">																
         
            <transformation>
-           		<translate x="6" y="6" z="6"/>
-           		<rotate axis= "x" angle="-90"/>
+           	<translate x="6" y="6" z="6"/>
+           	<rotate axis= "x" angle="-90"/>
             	<scale x="1.6" y="1.6" z="1.6"/>
             </transformation>
+	    
+	    <animation>
+	      <animationref id="animationSun"/>
+	    </animation>
        
-			<materials>
-				<material id="light" />
+	    <materials>
+		<material id="light" />
             </materials>
                          
-			<texture id="sunTexture" />
+	  <texture id="sunTexture" />
 
-			<children>
+	  <children>
             	<primitiveref id = "sphere" />
             </children>
             

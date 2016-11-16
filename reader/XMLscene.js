@@ -96,13 +96,7 @@ XMLscene.prototype.initPrimitives = function () {
 	this.primitivesInit = new Map();
 	
 	for (var [id, value] of this.graph.primitivesList) 
-	{
-		/*if(value instanceof MyRectangleData){
-			this.primitivesInit.set(id,new MyRectangle(this, value,1,1));
-		}	
-		else if(value instanceof MyTriangleData){
-			this.primitivesInit.set(id,new MyTriangle(this, value,1,1));
-		}*/	
+	{	
 		if(value instanceof MyCylinderData){
 			this.primitivesInit.set(id,new MyCylinder(this, value));
 		}
@@ -182,7 +176,7 @@ XMLscene.prototype.updateCamera = function () {
  * Also updates the color values interpreted by the parser.
  */
 XMLscene.prototype.setDefaultAppearance = function () {
-	this.setAmbient(0.2, 0.4, 0.8, 1.0);
+    this.setAmbient(0.2, 0.4, 0.8, 1.0);
     this.setDiffuse(0.2, 0.4, 0.8, 1.0);
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
@@ -245,8 +239,8 @@ XMLscene.prototype.displayComponents = function (component,materials,texture) {
 	this.pushMatrix();
 
 	//Transformation matrix
+	this.multMatrix(component.getTransformation().getMatrix());
 	this.multMatrix(component.getAnimTransformation(this.deltaTime).getMatrix());
-	this.multMatrix(component.getTransformation().getMatrix());	
 	
 	//Materials
 	//var currMaterial = component.getCurrMaterial();

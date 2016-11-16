@@ -1205,7 +1205,7 @@ MySceneGraph.prototype.parseComponents = function(rootElement) {
 		var primitiveComponent = [];
 
         if(children_elems.length != 1)
-		{
+	{
         	return "Component '" + id + "' has more than one children block";
         }
 
