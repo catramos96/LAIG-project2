@@ -97,13 +97,13 @@ XMLscene.prototype.initPrimitives = function () {
 	
 	for (var [id, value] of this.graph.primitivesList) 
 	{
-		if(value instanceof MyRectangleData){
+		/*if(value instanceof MyRectangleData){
 			this.primitivesInit.set(id,new MyRectangle(this, value,1,1));
 		}	
 		else if(value instanceof MyTriangleData){
 			this.primitivesInit.set(id,new MyTriangle(this, value,1,1));
-		}	
-		else if(value instanceof MyCylinderData){
+		}*/	
+		if(value instanceof MyCylinderData){
 			this.primitivesInit.set(id,new MyCylinder(this, value));
 		}
 		else if(value instanceof MySphereData){
@@ -284,19 +284,21 @@ XMLscene.prototype.displayComponents = function (component,materials,texture) {
 	var primitives = component.getPrimitives();
 	for (var i = 0; i < primitives.length; i++)
 	{
-		var prim = primitives[i];
-		
-		if(this.primitivesInit.has(prim.getId()))
-		{
-			var primInit = this.primitivesInit.get(prim.getId());
-			
-			if(prim instanceof MyRectangle)
-				primInit.setTextureLength(ls,lt);	
-			else if(prim instanceof MyTriangle)
-				primInit.setTextureLength(ls,lt);
-		
-			primInit.display();
-		}
+	    var prim = primitives[i];	//informacoes sobre a primitiva (data)
+	    var primInit = null;
+	  
+	    if(prim instanceof MyRectangleData){
+		primInit = new MyRectangle(this,prim,lS,lT);
+		 primInit.display();
+	    }
+	    else if(prim instanceof MyTriangleData){
+		primInit = new MyTriangle(this,prim,lS,lT);
+		 primInit.display();
+	    }
+	    else if(this.primitivesInit.has(prim.getId())){
+		primInit = this.primitivesInit.get(prim.getId());	//objeto com a primtiva    
+		 primInit.display();
+	    }
 	}
 
 	//next child component

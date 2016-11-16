@@ -192,6 +192,27 @@
         
     </primitives>
 
+    <!-- novo bloco de animacao -->
+	<animations>
+		<!-- podem existir zero ou mais nós "animation" -->
+		<!-- span é o tempo, em segundos, que a animação deve -->
+		<!-- demorar. Nesta versão do formato DSX, type pode ter -->
+		<!-- o valor "linear" ou "circular"; na animacao circular -->
+		<!-- os angulos sao expressos em graus  -->
+		<animation id="animation1" span="3" type="linear">
+			<controlpoint xx="4" yy="0" zz="0" />
+			<controlpoint xx="0" yy="0" zz="3" />
+			<controlpoint xx="0" yy="0" zz="0" />
+		</animation>
+		<!-- <animation id="animation2" span="3" type="linear">
+			<controlpoint xx="0" yy="0" zz="0" />
+			<controlpoint xx="4" yy="0" zz="0" />
+		</animation>
+		
+		<animation id="animation3" span="4" type="circular" centerx="0" centery="0" centerz="0" radius="4" startang="0" rotang="-60" /> -->
+	</animations>
+
+    
     <components>
 
     	<component id="sceneRoot">																

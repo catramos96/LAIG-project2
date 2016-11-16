@@ -33,15 +33,15 @@
 		0, 1, 2
  	];
 	
-	/*//Vertices v1 = p0p1 v2 = p1p2 v3 = p2p0
-    var v1 = new MyPoint(this.p1.getX()-this.p0.getX(),this.p1.getY()-this.p0.getY(),this.p1.getZ()-this.p0.getZ());	
-    var v2 = new MyPoint(this.p2.getX()-this.p1.getX(),this.p2.getY()-this.p1.getY(),this.p2.getZ()-this.p1.getZ()); 	
-    var v3 = new MyPoint(this.p2.getX()-this.p0.getX(),this.p2.getY()-this.p0.getY(),this.p2.getZ()-this.p0.getZ());	
+	//Vertices v1 = p0p1 v2 = p1p2 v3 = p2p0
+      var v1 = new MyPoint(this.p1.getX()-this.p0.getX(),this.p1.getY()-this.p0.getY(),this.p1.getZ()-this.p0.getZ());	
+      var v2 = new MyPoint(this.p2.getX()-this.p1.getX(),this.p2.getY()-this.p1.getY(),this.p2.getZ()-this.p1.getZ()); 	
+      var v3 = new MyPoint(this.p2.getX()-this.p0.getX(),this.p2.getY()-this.p0.getY(),this.p2.getZ()-this.p0.getZ());	
 
 	//Calculate Normals with Cross Product (v1xv3)
-    var nx = v1.getY()*v3.getZ() - v1.getZ()*v3.getY();
-    var ny = -(v1.getX()*v3.getZ() - v1.getZ()*v3.getX());
-    var nz = v1.getX()*v3.getY() -v1.getY()*v3.getX();
+      var nx = v1.getY()*v3.getZ() - v1.getZ()*v3.getY();
+      var ny = -(v1.getX()*v3.getZ() - v1.getZ()*v3.getX());
+      var nz = v1.getX()*v3.getY() -v1.getY()*v3.getX();
 
  	this.normals = [   
 		nx,ny,nz,
@@ -49,6 +49,7 @@
 		nx,ny,nz
  	];
 
+	
  	//Distances between vertices
  	var a = Math.sqrt(Math.pow(v3.getX(),2)+Math.pow(v3.getY(),2)+Math.pow(v3.getZ(),2)); //p2 a p0
 	var b = Math.sqrt(Math.pow(v1.getX(),2)+Math.pow(v1.getY(),2)+Math.pow(v1.getZ(),2)); //p0 a p1
@@ -64,8 +65,8 @@
 	0,0,
 	c/this.lS,0
 	];
-	*/
-	this.setTextureLength(this.lS, this.lT);
+	
+	//this.setTextureLength(this.lS, this.lT);
 	
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();

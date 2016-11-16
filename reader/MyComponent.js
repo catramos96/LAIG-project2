@@ -6,7 +6,7 @@
      this.defined = defined;    //To know if it has been processed in the parser
      this.materialIndex = 0;    //Index of the material in use
      this.materials = [];       //List of materials
-	 this.components = [];      //Children components
+     this.components = [];      //Children components
  }
 
  /**
@@ -48,8 +48,6 @@
 			var deltaAnim = deltaTime-tempTime+this.animations[i].getTime();
 			
 			return this.animations[i].getTransformation(deltaAnim);
-			
-			return animTransf; 
 		}
 	}
  	return new MyTransformation("empty");
