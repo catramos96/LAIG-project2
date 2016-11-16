@@ -281,7 +281,7 @@ XMLscene.prototype.displayComponents = function (component,materials,texture) {
 	
 	//Application of the material and texture
 	appearance.setTexture(textAppearance);
-	appearance.apply();
+	//appearance.apply();
 
 	//Draws the primitives
 	var primitives = component.getPrimitives();
@@ -301,11 +301,13 @@ XMLscene.prototype.displayComponents = function (component,materials,texture) {
 			if(primInit instanceof MyChessBoard){
 				textAppearance = primInit.getTexture().getAppearance();
 				appearance.setTexture(textAppearance);
-				appearance.apply();
+			//	appearance.apply();
+				
 			}
 				
 		
 			primInit.display();
+
 		}
 	}
 
