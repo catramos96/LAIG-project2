@@ -17,9 +17,10 @@ uniform float sv;
 void main() {
 
 	coords = vec4(aVertexPosition, 1.0);
-
-	if((coords.x+0.5 == su*1.0/du || coords.x+0.5 == su*1.0/du+1.0/du) && (coords.y+0.5 == sv*1.0/dv || coords.y+0.5 == sv*1.0/dv+1.0/dv ))
-		coords.z = 0.05;
+	
+	if(	coords.x+0.5 > su*1.0/du - 0.5/du && coords.x+0.5 < su*1.0/du+1.5/du  &&  	// ]su-0.5/du,su+1.5/du[
+		coords.y+0.5 > sv*1.0/dv - 0.5/dv && coords.y+0.5 < sv*1.0/dv+1.5/dv)		// ]sv-0.5/dv,sv+1.5/dv[
+		coords.z = 0.025;
 
 	gl_Position = uPMatrix * uMVMatrix * coords;
 
