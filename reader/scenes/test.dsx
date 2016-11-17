@@ -13,7 +13,6 @@
     </views>  
 
     <illumination doublesided="0" local="1" >
-   
         <ambient r="0.1" g="0.1" b="0.1" a="1" />
         <background r="0" g="0" b="0" a="1" />					      
     </illumination>
@@ -162,7 +161,7 @@
         	 </patch>
        </primitive>
        <primitive id="defaultBoard">
-       			<chessboard du="10" dv="10" textureref="textureTeste" su="2" sv="2">
+       			<chessboard du="7" dv="13" textureref="textureTeste" su="4" sv="1">
 					   <c1 r="0.0" g="0.0" b="1.0" a="1.0" />
 					   <c2 r="0.0" g="1.0" b="0.0" a="1.0" />
 					   <cs r="1.0" g="0.0" b="0.0" a="1.0" />

@@ -25,10 +25,10 @@ XMLscene.prototype.init = function (application) {
     this.gl.depthFunc(this.gl.LEQUAL); 	//depth func  = LEQUAL, enable
     this.gl.frontFace(this.gl.CCW); 	//front face   = CCW
 	
-	//para a transparencia
+/*	//para a transparencia
 	this.gl.enable(this.gl.BLEND);
 	this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE);
-	
+	*/
 	this.lastTime = -1;
 };
 
