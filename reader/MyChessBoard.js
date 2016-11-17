@@ -19,6 +19,9 @@ function MyChessBoard(scene, data) {
 	this.shader.setUniformsValues({du: this.dU});
 	this.shader.setUniformsValues({dv: this.dV});
 
+	this.shader.setUniformsValues({su: this.sU});
+	this.shader.setUniformsValues({sv: this.sV});
+
 	this.shader.setUniformsValues({c1: [this.c1.getR(),this.c1.getG(),this.c1.getB(),this.c1.getA()]});	//vec4
 	this.shader.setUniformsValues({c2: [this.c2.getR(),this.c2.getG(),this.c2.getB(),this.c2.getA()]});	//vec4
 	this.shader.setUniformsValues({c3: [this.c3.getR(),this.c3.getG(),this.c3.getB(),this.c3.getA()]});	//vec4
