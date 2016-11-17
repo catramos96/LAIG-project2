@@ -461,7 +461,7 @@
         
             <transformation>
             	<scale x="2" y="2" z="2" />
-            	<translate x="5" y ="0.1" z ="1"/>
+            	<translate x="5" y ="1.5" z ="1"/>
             	<rotate axis="x" angle="-90"/>
             </transformation>
        
@@ -481,7 +481,7 @@
         
             <transformation>
             	<scale x="2" y="2" z="2" />
-            	<translate x="1" y ="0.1" z ="5"/>
+            	<translate x="1" y ="1.5" z ="5"/>
             	<rotate axis="x" angle="-90"/>
             </transformation>
        

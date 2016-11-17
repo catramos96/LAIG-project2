@@ -161,11 +161,19 @@
         	 </patch>
        </primitive>
        <primitive id="defaultBoard">
+<<<<<<< HEAD
        			<chessboard du="7" dv="13" textureref="textureTeste" su="4" sv="1">
+=======
+       			<chessboard du="9" dv="16" textureref="textureTeste" su="3" sv="7">
+>>>>>>> c47e09d87f68f1d56e8ca40add17a712e59a55a7
 					   <c1 r="0.0" g="0.0" b="1.0" a="1.0" />
 					   <c2 r="0.0" g="1.0" b="0.0" a="1.0" />
 					   <cs r="1.0" g="0.0" b="0.0" a="1.0" />
               	</chessboard>
+       </primitive>
+       <primitive id="defaultSpaceship">
+       			<vehicle>
+       			</vehicle>
        </primitive>
         
     </primitives>
@@ -228,7 +236,7 @@
 			<texture id="none" />
 
 			<children>
-            	<primitiveref id = "defaultBoard" />
+            	<primitiveref id = "defaultSpaceship" />
             </children>
             
         </component>

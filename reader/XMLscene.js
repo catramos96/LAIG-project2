@@ -29,6 +29,7 @@ XMLscene.prototype.init = function (application) {
 	this.gl.enable(this.gl.BLEND);
 	this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE);
 	*/
+
 	this.lastTime = -1;
 };
 
@@ -114,6 +115,9 @@ XMLscene.prototype.initPrimitives = function () {
 		}
 		else if(value instanceof MyChessBoardData){
 			this.primitivesInit.set(id,new MyChessBoard(this, value));
+		}
+		else if(value instanceof MyVehicleData){
+			this.primitivesInit.set(id,new MyVehicle(this));
 		}
 	}
 }

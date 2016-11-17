@@ -855,7 +855,6 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 				var x,y,z;
 				var tmp = [];
 				var controlPointsTotal = [];
-				var uValue = 0;
 
 				for(nU = 0; nU < oU+1 ; nU++){		//order U
 					tmp = [];
@@ -863,11 +862,6 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 						x = this.reader.getFloat(controlPoints[nU * (oV+1) + nV], 'x');
 						y = this.reader.getFloat(controlPoints[nU * (oV+1) + nV], 'y');
 						z = this.reader.getFloat(controlPoints[nU * (oV+1) + nV], 'z');
-		
-						if(nV != 0 && x != uValue)
-							return "ControlPoints not ordered";
-						else
-							uValue = x;
 
 						tmp.push([x,y,z,1]);
 					}
@@ -908,6 +902,10 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 				}
 				
 				prim = new MyChessBoardData(id,du,dv,texture,su,sv,c[0],c[1],c[2]);
+				break;
+			}
+			case "vehicle" : {
+				prim = new MyVehicleData(id);
 				break;
 			}
 		}
@@ -1244,7 +1242,7 @@ MySceneGraph.prototype.parseComponents = function(rootElement) {
 			//If the primitive's id exists
          	if(!this.primitivesList.has(childrenId))	
 			{
-				return "Component '" + id + "' primitiveref '" + childrenPrimitivesId[j] + "' not in the list of primitives";
+				return "Component '" + id + "' primitiveref '" + childrenId + "' not in the list of primitives";
          	}
          	//adds to the primitivescomponets of the component
          	primitiveComponent.push(this.primitivesList.get(childrenId));
