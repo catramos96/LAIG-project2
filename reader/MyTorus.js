@@ -41,9 +41,9 @@
 								(R+r*Math.cos(j*alfa))*Math.sin(i*beta),	//(R+r*cos(a))*sin(b)
 								r*Math.sin(j*alfa));						//r*sin(a)
 
-			this.normals.push((Math.cos(j*alfa))*Math.cos(i*beta),			//cos(a)*cos(b)
-								(Math.cos(j*alfa))*Math.sin(i*beta),		//cos(a)*sin(b)
-								Math.sin(j*alfa));							//sin(a)
+			this.normals.push(-(Math.cos(j*alfa))*Math.cos(i*beta),			//cos(a)*cos(b)
+								(-Math.cos(j*alfa))*Math.sin(i*beta),		//cos(a)*sin(b)
+								-Math.sin(j*alfa));							//sin(a)
 
        		this.texCoords.push(i/this.loops,j/this.slices);
       
