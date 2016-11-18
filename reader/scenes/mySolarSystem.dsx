@@ -178,7 +178,7 @@
 		<primitive id="firstBoard">
        		<chessboard du="20" dv="20" textureref="marmoreTexture" su="8" sv="8">
 				<c1 r="0.0" g="0.0" b="0.0" a="1.0" />
-				<c2 r="1.0" g="1.0" b="1.0" a="1.0" />
+				<c2 r="0" g="0" b="0.5" a="1.0" />
 				<cs r="1.0" g="0.0" b="0.0" a="1.0" />
             </chessboard>
        </primitive>
@@ -186,7 +186,7 @@
 	   <primitive id="base1Board">
        		<chessboard du="6" dv="10" textureref="marmoreTexture" su="1" sv="1">
 				<c1 r="0.0" g="0.0" b="0.0" a="1.0" />
-				<c2 r="1.0" g="1.0" b="1.0" a="1.0" />
+				<c2 r="0" g="0" b="0.5" a="1.0" />
 				<cs r="1.0" g="0.0" b="0.0" a="1.0" />
             </chessboard>
        </primitive>
@@ -194,7 +194,7 @@
 	   	<primitive id="base2Board">
        		<chessboard du="15" dv="5" textureref="marmoreTexture" su="1" sv="1">
 				<c1 r="0.0" g="0.0" b="0.0" a="1.0" />
-				<c2 r="1.0" g="1.0" b="1.0" a="1.0" />
+				<c2 r="0" g="0" b="0.5" a="1.0" />
 				<cs r="1.0" g="0.0" b="0.0" a="1.0" />
             </chessboard>
        </primitive> 
@@ -922,10 +922,10 @@
 			</animation>
 			
 			<materials>
-				<material id="matt1" />
+				<material id="shiny" />
             </materials>
                          
-			<texture id="none" />
+			<texture id="satelliteTexture" />
 
 			<children>
 				<primitiveref id = "spaceShip" />
