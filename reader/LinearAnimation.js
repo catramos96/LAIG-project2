@@ -19,14 +19,16 @@
 	{
 		//vetor 2D no plano xOz
 		var deltaX = this.controlPoints[i+1].getX()-this.controlPoints[i].getX();
+		var deltaY = this.controlPoints[i+1].getY()-this.controlPoints[i].getY();
 		var deltaZ = this.controlPoints[i+1].getZ()-this.controlPoints[i].getZ();
 		
 		var tempDist = Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaZ,2));
 		
 		this.allDistances.push(tempDist);
 		
+		this.totalDist += Math.abs(deltaY);
 		this.totalDist += tempDist;
-	}
+	} 
 	this.vel = this.totalDist/this.time;
 
  }
@@ -47,32 +49,44 @@
  {
 	var atualDist = time*this.vel;
 	var allDist = 0;
+	var temp = 0;
 	var position = [];
 	position[0] = this.controlPoints[0].getX();
-	position[1] = 0;
 	position[2] = this.controlPoints[0].getZ();
-	position[3] = 0;
 	
 	//encontra entre que pontos se encontra a distancia atual
 	for(var i = 0; i < this.allDistances.length; i++)
 	{
-		position[1] = this.controlPoints[i].getY();
+		//calculo do deltaX e deltaY
+		var deltaX = this.controlPoints[i+1].getX()-this.controlPoints[i].getX();
+		var deltaZ = this.controlPoints[i+1].getZ()-this.controlPoints[i].getZ();	
+		position[3] = Math.atan(deltaZ/deltaX);
 		
+		//deslocamento em y entre os 2 pontos
+		var deltaY = this.controlPoints[i+1].getY()-this.controlPoints[i].getY();
+		allDist += Math.abs(deltaY);		//distancia total percorrida ate ao proximo ponto : acresenta a distancia percorrida em 
+		
+		//tratar primeiro do y
+		if(atualDist < allDist)	//se a distancia atual for menor que toda a distancia total, neste caso esta a subir em y
+		{
+			temp = atualDist-(allDist-Math.abs(deltaY)); //distancia percorida desde que comecou a subir
+			
+			if(deltaY < 0)	//esta a descer
+				position[1] = this.controlPoints[i].getY()-temp;
+			else
+				position[1] = this.controlPoints[i].getY()+temp;
+			
+			break;
+		}
+			
 		allDist += this.allDistances[i];
-		var temp = atualDist;
 		
+		//depois do y e do z
 		if(atualDist <= allDist)	//significa que os pontos de controlo são i e i+1
 		{
-			if(i != 0)
-				temp = atualDist-this.allDistances[i-1]; //distancia percorida desde o ultimo ponto de controlo
+			temp = atualDist-(allDist-this.allDistances[i]); //distancia percorida desde o ultimo ponto de controlo
 			
-			//calculo do deltaX e deltaY
-			var a = this.controlPoints[i+1].getX()-this.controlPoints[i].getX();
-			var b = this.controlPoints[i+1].getZ()-this.controlPoints[i].getZ();
-			
-			position[3] = Math.atan(b/a);
-			
-			if(a == 0 || b == 0)
+			if(deltaX == 0 || deltaZ == 0)
 			{
 				position[0] += Math.cos(position[3])*temp;
 				position[2] += Math.sin(position[3])*temp;
@@ -82,6 +96,9 @@
 				position[0] -= Math.cos(position[3])*temp;
 				position[2] -= Math.sin(position[3])*temp;
 			}
+			
+			position[1] = this.controlPoints[i+1].getY();
+			position[3] = 0;
 			
 			break;
 		}

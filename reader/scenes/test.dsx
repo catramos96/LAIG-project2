@@ -183,29 +183,25 @@
 		<!-- demorar. Nesta versão do formato DSX, type pode ter -->
 		<!-- o valor "linear" ou "circular"; na animacao circular -->
 		<!-- os angulos sao expressos em graus  -->
-		<animation id="animation1" span="3" type="linear">
+		<animation id="animation1" span="5" type="linear">
 			<controlpoint xx="4" yy="0" zz="0" />
-			<controlpoint xx="0" yy="0.1" zz="3" />
-			<controlpoint xx="0" yy="0.2" zz="0" />
+			<controlpoint xx="0" yy="2" zz="3" />
+			<controlpoint xx="0" yy="1" zz="0" />
 		</animation>
-		<animation id="animation2" span="3" type="linear">
-			<controlpoint xx="0" yy="0.3" zz="0" />
-			<controlpoint xx="4" yy="0.4" zz="0" />
+		<animation id="animation2" span="5" type="linear">
+			<controlpoint xx="0" yy="1" zz="0" />
+			<controlpoint xx="4" yy="3" zz="0" />
 		</animation>
 		
-		<animation id="animation3" span="4" type="circular" centerx="0" centery="0.5" centerz="0" radius="4" startang="0" rotang="-60" />
+		<animation id="animation3" span="4" type="circular" centerx="0" centery="3" centerz="0" radius="4" startang="0" rotang="-60" />
 	</animations>
 
     <components>
 
     	<component id="sceneRoot">																
-        
             <transformation>			
             </transformation>
-            
-			<animation>
-			</animation>
-			
+           
 			<materials>
                 <material id="light" />
             </materials>
@@ -214,19 +210,14 @@
                      
 			<children>
 				<componentref id="Stars" /> 
-				<componentref id="Plane" />
+				<!--<componentref id="Plane" />-->
             </children>
-            
         </component>
 	
         <component id="Plane">																
-        
 			<transformation>
             </transformation>
        
-			<animation>
-			</animation>
-			
 			<materials>
 				<material id="shiny" />
             </materials>
@@ -236,33 +227,18 @@
 			<children>
             	<primitiveref id = "defaultSpaceship" />
             </children>
-            
         </component>
 		
 		<component id="Stars">																
-        
-           <transformation>
+			<transformation>
 				<scale x="0.2" y = "0.2" z="0.2" />
-           </transformation>
+			</transformation>
 			
-		<!-- bloco "animation" opcional -->
-		<animation>
-			<!-- podem ser declaradas zero ou mais animacoes -->
-			<!-- de entre as declaradas no bloco de animacoes; -->
-			<!-- as animacoes devem ser executadas sequencialmente -->
-			<!-- pela ordem com que sao declaradas.     -->
-			<!-- NOTA: as transformacoes geometricas da -->
-			<!-- animacao seguem as mesmas regras de ordenacao -->
-			<!-- definidas no trabalho anterior para as -->
-			<!-- transformacoes geometricas; dado que as -->
-			<!-- animacoes sao declaradas apos as transformacoes -->
-			<!-- geometricas do mesmo objeto, isso significa -->
-			<!-- que as animacoes sao afetadas pelas transformacoes -->
-			<!-- geometricas do objeto.  -->
-		  <animationref id="animation1" />
-		  <animationref id="animation2" />
-		  <animationref id="animation3" />
-	      </animation>
+			<animation>
+				<animationref id="animation1" />
+				<animationref id="animation2" />
+				<animationref id="animation3" />
+			</animation>
        
 			<materials>
 				<material id="inherit" />
@@ -272,8 +248,7 @@
 
 			<children>
             	<primitiveref id = "sphere" />
-            </children>
-            
+            </children>   
         </component>
                 
     </components>

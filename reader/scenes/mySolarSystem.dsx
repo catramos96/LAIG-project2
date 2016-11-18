@@ -206,20 +206,53 @@
 
     <!-- novo bloco de animacao -->
     <animations>
-		<animation id="animationComets" span="6" type="linear">
+		<animation id="animationComets" span="12" type="linear">
 			<controlpoint xx="0" yy="0" zz="0" />
-			<controlpoint xx="-3" yy="0" zz="3" />
+			<controlpoint xx="-0.25" yy="-0.1" zz="0.25" />
+			<controlpoint xx="-0.5" yy="-0.2" zz="0.5" />
+			<controlpoint xx="-0.75" yy="-0.3" zz="0.75" />
+			<controlpoint xx="-1" yy="-0.4" zz="1" />
+			<controlpoint xx="-1.25" yy="-0.5" zz="1.25" />
+			<controlpoint xx="-1.5" yy="-0.6" zz="1.5" />
+			<controlpoint xx="-1.75" yy="-0.7" zz="1.75" />
+			<controlpoint xx="-2" yy="-0.8" zz="2" />
+			<controlpoint xx="-2.25" yy="-0.9" zz="2.25" />
+			<controlpoint xx="-2.5" yy="-1" zz="2.5" />
+			<controlpoint xx="-2.75" yy="-1.1" zz="2.75" />
 		</animation>
-		
-		<animation id="rotAnimation" span="6" type="circular" centerx="0" centery="0" centerz="0" radius="0.01" startang="0" rotang="-360" /> -->
+	
+		<animation id="rotAnimation" span="6" type="circular" centerx="0" centery="0" centerz="0" radius="0.01" startang="0" rotang="-360" />
 		
 		<animation id="animSatellite1" span="2" type="linear">
 			<controlpoint xx="0" yy="0" zz="0" />
 			<controlpoint xx="2" yy="0" zz="0" />
 		</animation>
 		
-		<animation id="animSatellite2" span="4" type="circular" centerx="0" centery="0" centerz="0" radius="2" startang="0" rotang="25" /> -->
-    </animations>
+		<animation id="animSatellite2" span="4" type="circular" centerx="0" centery="0" centerz="0" radius="2" startang="0" rotang="30" /> 
+    
+		<animation id="animSatellite3" span="6" type="circular" centerx="0" centery="0" centerz="0" radius="2" startang="30" rotang="-40" /> 
+	
+		<animation id="animSpaceShip1" span="6" type="linear">
+			<controlpoint xx="0" yy="0" zz="0" />
+			<controlpoint xx="0" yy="3" zz="20" />
+		</animation>
+		
+		<animation id="animSpaceShip2" span="6" type="linear">
+			<controlpoint xx="0" yy="0" zz="0" />
+			<controlpoint xx="2" yy="2" zz="0" />
+		</animation>
+		
+		<animation id="animSpaceShip3" span="6" type="linear">
+			<controlpoint xx="0" yy="0" zz="0" />
+			<controlpoint xx="2" yy="2" zz="0" />
+		</animation>
+		
+		<animation id="animSpaceShip4" span="6" type="linear">
+			<controlpoint xx="0" yy="0" zz="0" />
+			<controlpoint xx="2" yy="2" zz="0" />
+		</animation>
+		
+	</animations>
 
     <components>
 		<component id="sceneRoot">
@@ -884,6 +917,10 @@
 				<rotate axis="y" angle="90" />
             </transformation>
 			
+			<animation>
+				<animationref id="animSpaceShip1" />
+			</animation>
+			
 			<materials>
 				<material id="matt1" />
             </materials>
@@ -906,6 +943,7 @@
 			<animation>
 				<animationref id="animSatellite1"/>
 				<animationref id="animSatellite2"/>
+				<animationref id="animSatellite3"/>
 			</animation>
 			
 			<materials>
@@ -1138,6 +1176,7 @@
 			
 			<animation>
 				<animationref id="rotAnimation"/>
+				<animationref id="rotAnimation"/>
 			</animation>
        
 			<materials>
@@ -1160,6 +1199,7 @@
             </transformation>
 			
 			<animation>
+				<animationref id="rotAnimation"/>
 				<animationref id="rotAnimation"/>
 			</animation>
        
@@ -1185,6 +1225,7 @@
 			
 			<animation>
 				<animationref id="rotAnimation"/>
+				<animationref id="rotAnimation"/>
 			</animation>
        
 			<materials>
@@ -1207,6 +1248,7 @@
             </transformation>
 			
 			<animation>
+				<animationref id="rotAnimation"/>
 				<animationref id="rotAnimation"/>
 			</animation>
        
@@ -1231,6 +1273,7 @@
             </transformation>
 			
 			<animation>
+				<animationref id="rotAnimation"/>
 				<animationref id="rotAnimation"/>
 			</animation>
        
@@ -1271,6 +1314,7 @@
             </transformation>
 			
 			<animation>
+				<animationref id="rotAnimation"/>
 				<animationref id="rotAnimation"/>
 			</animation>
        
@@ -1314,6 +1358,7 @@
 			
 			<animation>
 				<animationref id="rotAnimation"/>
+				<animationref id="rotAnimation"/>
 			</animation>
        
 			<materials>
@@ -1337,6 +1382,7 @@
             </transformation>
 			
 			<animation>
+				<animationref id="rotAnimation"/>
 				<animationref id="rotAnimation"/>
 			</animation>
        
@@ -1362,6 +1408,7 @@
 			</transformation>
 			
 			<animation>
+				<animationref id="rotAnimation"/>
 				<animationref id="rotAnimation"/>
 			</animation>
 		   
