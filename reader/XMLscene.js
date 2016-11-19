@@ -242,6 +242,9 @@ XMLscene.prototype.displayComponents = function (component,materials,texture) {
 
 	this.pushMatrix();
 
+	
+	console.log(component.getId());
+	
 	//Transformation matrix
 	this.multMatrix(component.getTransformation().getMatrix());
 	this.multMatrix(component.getAnimTransformation(this.deltaTime).getMatrix());

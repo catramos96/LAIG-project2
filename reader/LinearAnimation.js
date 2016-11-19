@@ -17,12 +17,14 @@
 	
 	for(var i = 0; i < this.controlPoints.length-1; i++)
 	{
-		//vetor 2D no plano xOz
-		var deltaX = this.controlPoints[i+1].getX()-this.controlPoints[i].getX();
+		var cpoint1 = vec3.fromValues(this.controlPoints[i].getX(),0,this.controlPoints[i].getZ());
+		var cpoint2 = vec3.fromValues(this.controlPoints[i+1].getX(),0,this.controlPoints[i+1].getZ());
+		//var deltaX = this.controlPoints[i+1].getX()-this.controlPoints[i].getX();
 		var deltaY = this.controlPoints[i+1].getY()-this.controlPoints[i].getY();
-		var deltaZ = this.controlPoints[i+1].getZ()-this.controlPoints[i].getZ();
+		//var deltaZ = this.controlPoints[i+1].getZ()-this.controlPoints[i].getZ();
 		
-		var tempDist = Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaZ,2));
+		//var tempDist = Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaZ,2));
+		var tempDist = vec3.distance(cpoint1,cpoint2);
 		
 		this.allDistances.push(tempDist);
 		
@@ -30,84 +32,96 @@
 		this.totalDist += tempDist;
 	} 
 	this.vel = this.totalDist/this.time;
-
+	
+	this.angle = 0;
  }
  
   LinearAnimation.prototype.getTransformation = function(time){
 	
 	transformation = new MyTransformation(this.id);
 	
-	var atualPos = this.getAtualInfo(time);		//x,y,z,ang
-
+	var atualPos = this.getAtualPosition(time);		//x,y,z
+	
 	transformation.translate(atualPos[0],atualPos[1],atualPos[2]);
-	transformation.rotate('y',atualPos[3]);
+	transformation.rotate('y',this.angle);
 
 	return transformation;
  }
 
- LinearAnimation.prototype.getAtualInfo = function(time)
+ LinearAnimation.prototype.getAtualPosition = function(time)
  {
-	var atualDist = time*this.vel;
-	var allDist = 0;
-	var temp = 0;
-	var position = [];
-	position[0] = this.controlPoints[0].getX();
-	position[2] = this.controlPoints[0].getZ();
+	var atualDist = time*this.vel;	//o que percorreu no tempo recebido desde o inicio da animacao
+	var allDist = 0;				//distancia desde o inicio da animacao ate ao proximo ponto de controlo
+	var lastDist = 0;				//distancia desde o ultimo ponto de controlo passado até a distancia atual
+	var newAngle = this.angle;
+	var position = vec3.create();	//posicao atual
+	var point1, point2, newPoint;
 	
-	//encontra entre que pontos se encontra a distancia atual
+	//encontra entre que pontos de controlo se encontra a distancia atual
 	for(var i = 0; i < this.allDistances.length; i++)
 	{
-		//calculo do deltaX e deltaY
-		var deltaX = this.controlPoints[i+1].getX()-this.controlPoints[i].getX();
-		var deltaZ = this.controlPoints[i+1].getZ()-this.controlPoints[i].getZ();	
-		position[3] = Math.atan(deltaZ/deltaX);
+		//-- calculos para decidir o angulo
+		point1 = vec3.fromValues(this.controlPoints[i].getX(),0,this.controlPoints[i].getZ());
+		point2 = vec3.fromValues(this.controlPoints[i+1].getX(),0,this.controlPoints[i+1].getZ());
+		
+		//a direcao do ponto atual sera a subtracao entre os 2 pontos de controlo em xz
+		var resVec = vec3.create();
+		var dir = vec3.create();
+		vec3.subtract(resVec,point2,point1);
+		vec3.normalize(dir,resVec);
+		
+		//as componentes da direcao em x e z nao podem ser as 2 zero 
+		var dirX = vec3.dot(dir,vec3.fromValues(1,0,0));
+		var dirZ = vec3.dot(dir,vec3.fromValues(0,0,1));
+
+		if(!(dirX == 0 && dirZ == 0)){
+			//newAngle = -Math.atan2(dirZ,dirX);
+			newAngle = -Math.atan2(dirZ,dirX)+Math.PI/2;
+		}
+		
+		//-- calculos para as distancias
 		
 		//deslocamento em y entre os 2 pontos
 		var deltaY = this.controlPoints[i+1].getY()-this.controlPoints[i].getY();
-		allDist += Math.abs(deltaY);		//distancia total percorrida ate ao proximo ponto : acresenta a distancia percorrida em 
-		
-		//tratar primeiro do y
-		if(atualDist < allDist)	//se a distancia atual for menor que toda a distancia total, neste caso esta a subir em y
+		allDist += Math.abs(deltaY);		//acrescenta a distancia percorrida em y, antes da distancia entre os 2 pontos em xz
+	
+		//esta dentro do intervalo, logo esta a deslocar-se em yy entre os pontos de controlo i e i+1
+		if(atualDist <= allDist)
 		{
-			temp = atualDist-(allDist-Math.abs(deltaY)); //distancia percorida desde que comecou a subir
-			
+			lastDist = atualDist-(allDist-Math.abs(deltaY)); //distancia percorida desde que comecou a subir/descer
+	
 			if(deltaY < 0)	//esta a descer
-				position[1] = this.controlPoints[i].getY()-temp;
-			else
-				position[1] = this.controlPoints[i].getY()+temp;
+				dir = vec3.fromValues(0,-1,0);
+			else	//esta a subir
+				dir = vec3.fromValues(0,1,0);
 			
+			//o ponto atual sera acresentado a este ponto (ponto i com y )
+			newPoint = vec3.fromValues(this.controlPoints[i].getX(),this.controlPoints[i].getY(),this.controlPoints[i].getZ());
+
 			break;
 		}
 			
-		allDist += this.allDistances[i];
+		allDist += this.allDistances[i];	//acresecnta a distancia percorrida em xz
 		
-		//depois do y e do z
-		if(atualDist <= allDist)	//significa que os pontos de controlo são i e i+1
+		//esta dentro do intervalo, logo esta a deslocar-se em xz entre os pontos de controlo i e i+1
+		if(atualDist <= allDist)
 		{
-			temp = atualDist-(allDist-this.allDistances[i]); //distancia percorida desde o ultimo ponto de controlo
+			lastDist = atualDist-(allDist-this.allDistances[i]); //distancia percorida desde o ultimo ponto de controlo, em xz
 			
-			if(deltaX == 0 || deltaZ == 0)
-			{
-				position[0] += Math.cos(position[3])*temp;
-				position[2] += Math.sin(position[3])*temp;
-			}
-			else
-			{
-				position[0] -= Math.cos(position[3])*temp;
-				position[2] -= Math.sin(position[3])*temp;
-			}
-			
-			position[1] = this.controlPoints[i+1].getY();
-			position[3] = 0;
+			//o ponto atual sera acresentado a este ponto (ponto i com y de i+1 porque ja fez a animacao de subir)
+			newPoint = vec3.fromValues(this.controlPoints[i].getX(),this.controlPoints[i+1].getY(),this.controlPoints[i].getZ());
 			
 			break;
-		}
-		else
-		{
-			position[0] += this.controlPoints[i+1].getX()-this.controlPoints[i].getX();		//deltaX
-			position[2] += this.controlPoints[i+1].getZ()-this.controlPoints[i].getZ();		//deltaz
 		}
 	}
+	
+	//adiciona ao novo ponto calculado um vetor com a direcao e distancias calculadas
+	var tempVec = vec3.create();
+	vec3.scale(tempVec,dir,lastDist);
+	vec3.add(position,newPoint,tempVec);
+	
+	this.angle = newAngle; 	//so atualiza no fim
+	
 	return position;
  }
  

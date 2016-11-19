@@ -178,15 +178,13 @@
 	
 	<!-- novo bloco de animacao -->
 	<animations>
-		<!-- podem existir zero ou mais nós "animation" -->
-		<!-- span é o tempo, em segundos, que a animação deve -->
-		<!-- demorar. Nesta versão do formato DSX, type pode ter -->
-		<!-- o valor "linear" ou "circular"; na animacao circular -->
-		<!-- os angulos sao expressos em graus  -->
 		<animation id="animation1" span="5" type="linear">
 			<controlpoint xx="4" yy="0" zz="0" />
 			<controlpoint xx="0" yy="2" zz="3" />
 			<controlpoint xx="0" yy="1" zz="0" />
+			
+		<!--	<controlpoint xx="0" yy="0" zz="0" />
+			<controlpoint xx="5" yy="0" zz="-5" />-->
 		</animation>
 		<animation id="animation2" span="5" type="linear">
 			<controlpoint xx="0" yy="1" zz="0" />
@@ -209,14 +207,21 @@
 			<texture id="none" />
                      
 			<children>
-				<componentref id="Stars" /> 
-				<!--<componentref id="Plane" />-->
+			<!--	<componentref id="Stars" /> -->
+				<componentref id="Plane" />
             </children>
         </component>
 	
         <component id="Plane">																
 			<transformation>
+				<scale x="0.2" y="0.2" z="0.2" />
             </transformation>
+			
+			<animation>
+				<animationref id="animation1" />
+				<animationref id="animation2" />
+				<animationref id="animation3" />
+			</animation>
        
 			<materials>
 				<material id="shiny" />
@@ -233,12 +238,6 @@
 			<transformation>
 				<scale x="0.2" y = "0.2" z="0.2" />
 			</transformation>
-			
-			<animation>
-				<animationref id="animation1" />
-				<animationref id="animation2" />
-				<animationref id="animation3" />
-			</animation>
        
 			<materials>
 				<material id="inherit" />
