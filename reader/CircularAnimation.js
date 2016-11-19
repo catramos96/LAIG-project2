@@ -30,8 +30,8 @@
 	transformation.translate(this.pc.getX(),this.pc.getY(),this.pc.getZ());
 	transformation.rotate('y',(angAtual+this.startAng));
 	transformation.translate(this.r,0,0);
-	/*
-	if(this.rotAng > 0)
+	
+	/*if(this.rotAng > 0)
 	{
 		transformation.rotate('y', 180); 
 	}*/
