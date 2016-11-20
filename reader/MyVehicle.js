@@ -49,22 +49,22 @@
  	this.cabine = new MyPatch(this.scene,new MyPatchData("",20,20,3,3,cabineCP));
 
  	 this.white.setAmbient(0.8, 0.8, 0.8, 1);
-	 this.white.setDiffuse(0.2, 0.2, 0.2, 1);
+	 this.white.setDiffuse(0.8, 0.8, 0.8, 1);
 	 this.white.setSpecular(1, 1, 1, 1);	
 	 this.white.setShininess(120);
 	 
 	 this.blue.setAmbient(0, 0, 0.6, 1);
-	 this.blue.setDiffuse(0.2, 0.2, 0.2, 1);
+	 this.blue.setDiffuse(0, 0, 0.6, 1);
 	 this.blue.setSpecular(1, 1, 1, 1);	
 	 this.blue.setShininess(120);
 
 	 this.dark.setAmbient(0.3, 0.3,0.3, 1);
-	 this.dark.setDiffuse(0.2, 0.2, 0.2, 1);
+	 this.dark.setDiffuse(0.3, 0.3,0.3, 1);
 	 this.dark.setSpecular(1, 1, 1, 1);	
 	 this.dark.setShininess(120);
 
 	 this.green.setAmbient(0, 0.7,0, 1);
-	 this.green.setDiffuse(0.2, 0.2, 0.2, 1);
+	 this.green.setDiffuse(0, 0.7,0, 1);
 	 this.green.setSpecular(1, 1, 1, 1);	
 	 this.green.setShininess(120);
  }
