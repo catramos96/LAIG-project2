@@ -9,6 +9,9 @@
 
  LinearAnimation.prototype = Object.create(Animation.prototype);
 
+ /**
+  * Calculates velocity and distances
+  */
  LinearAnimation.prototype.doCalculations = function(){
 	 
 	//calcular a velocidade 
@@ -17,17 +20,20 @@
 	
 	for(var i = 0; i < this.controlPoints.length-1; i++)
 	{
+		//control point in xz
 		var cpoint1 = vec3.fromValues(this.controlPoints[i].getX(),0,this.controlPoints[i].getZ());
 		var cpoint2 = vec3.fromValues(this.controlPoints[i+1].getX(),0,this.controlPoints[i+1].getZ());
-		//var deltaX = this.controlPoints[i+1].getX()-this.controlPoints[i].getX();
-		var deltaY = this.controlPoints[i+1].getY()-this.controlPoints[i].getY();
-		//var deltaZ = this.controlPoints[i+1].getZ()-this.controlPoints[i].getZ();
 		
-		//var tempDist = Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaZ,2));
+		//displacement in yy
+		var deltaY = this.controlPoints[i+1].getY()-this.controlPoints[i].getY();
+		
+		//distance between cpoint1 and cpoint2
 		var tempDist = vec3.distance(cpoint1,cpoint2);
 		
+		//vetor with all tempDist's
 		this.allDistances.push(tempDist);
 		
+		//total dist is the distance at xz and yy
 		this.totalDist += Math.abs(deltaY);
 		this.totalDist += tempDist;
 	} 
@@ -36,18 +42,24 @@
 	this.angle = 0;
  }
  
+/**
+ * Calculates the transformation at deltaTime
+ */
   LinearAnimation.prototype.getTransformation = function(time){
 	
-	transformation = new MyTransformation(this.id);
+	transformation = new MyTransformation(this.id);	//new transformation
 	
 	var atualPos = this.getAtualPosition(time);		//x,y,z
 	
-	transformation.translate(atualPos[0],atualPos[1],atualPos[2]);
-	transformation.rotate('y',this.angle);
+	transformation.translate(atualPos[0],atualPos[1],atualPos[2]);	//translates for the position calculated
+	transformation.rotate('y',this.angle);	//angle between the 2 control points
 
 	return transformation;
  }
 
+ /** 
+  * Calculates the atual position and angle whereas the time.
+  */
  LinearAnimation.prototype.getAtualPosition = function(time)
  {
 	var atualDist = time*this.vel;	//o que percorreu no tempo recebido desde o inicio da animacao
@@ -125,10 +137,13 @@
 	return position;
  }
  
+ /** 
+  * Prints information
+  */
  LinearAnimation.prototype.printInfo = function(){
 	 
-	//console.log("Linear Transformation\n\nID : "+this.id+ "\nTime : "+this.time);
-	//console.log("Control Points :\n");
+	console.log("Linear Transformation\n\nID : "+this.id+ "\nTime : "+this.time);
+	console.log("Control Points :\n");
 	for(var i = 0; i < this.controlPoints.length; i++){
 		this.controlPoints[i].printInfo();
 	}

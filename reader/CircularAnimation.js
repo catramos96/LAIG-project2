@@ -14,13 +14,19 @@
 
  CircularAnimation.prototype = Object.create(Animation.prototype);
 
+ /**
+  * Print Animation
+  */
  CircularAnimation.prototype.printInfo = function(){
 	 
-	//console.log("Circular Transformation\n\nID : "+this.id+ "\nTime : "+this.time+"\nCenter : ");
+	console.log("Circular Transformation\n\nID : "+this.id+ "\nTime : "+this.time+"\nCenter : ");
 	this.pc.printInfo();
-	//console.log("Radius : "+this.r+"\nStart Angle : "+this.startAng+"\nRotate Angle : "+this.rotAng+"\n");
+	console.log("Radius : "+this.r+"\nStart Angle : "+this.startAng+"\nRotate Angle : "+this.rotAng+"\n");
 }
 
+/**
+ * Calculates the transformation at deltaTime
+ */
  CircularAnimation.prototype.getTransformation = function(deltTime){
 	
 	transformation = new MyTransformation(this.id);
@@ -31,11 +37,7 @@
 	transformation.rotate('y',(angAtual+this.startAng));
 	transformation.translate(this.r,0,0);
 	
-	/*if(this.rotAng > 0)
-	{
-		transformation.rotate('y', 180); 
-	}*/
-	
+	//roda no sentido positivo de xx
 	if(this.rotAng > 0)	transformation.rotate('y', 90); 
 	else if(this.rotAng < 0)	transformation.rotate('y', -90);
 	

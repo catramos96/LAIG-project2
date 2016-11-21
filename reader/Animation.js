@@ -6,11 +6,17 @@ function Animation(id,time) {
 	this.time = time;
 }
 
+/**
+ * Received time
+ */
 Animation.prototype.getTime = function()
 {
 	return this.time;
 }
 
+/** 
+ * Received id
+ */
 Animation.prototype.getId = function()
 {
 	return this.id;
