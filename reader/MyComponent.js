@@ -38,22 +38,24 @@
  	return this.id;
  }
 
- MyComponent.prototype.getAnimTransformation = function(deltaTime)  //Transformation
+ //NEW
+ MyComponent.prototype.getAnimTransformation = function(deltaTime)  //Animation Transformation
  {  
     var tempTime = 0;
    
     //ciclo que percorre as animacoes para saber se este deltaTime se adequa a alguma animacao
     for(var i = 0; i < this.animations.length; i++)
     {
-		tempTime += this.animations[i].getTime();
+		tempTime += this.animations[i].getTime();	//total time of i animation
+		
 		if(deltaTime <= tempTime)	//esta nesta animacao
 		{
-			var deltaAnim = deltaTime-tempTime+this.animations[i].getTime();	
-			this.animTransformation = this.animations[i].getTransformation(deltaAnim);
+			var deltaAnim = deltaTime-tempTime+this.animations[i].getTime();	//time since animation begined
+			this.animTransformation = this.animations[i].getTransformation(deltaAnim);	//update the animTransformation
 			break;
 		}
     }
-    return this.animTransformation;
+    return this.animTransformation;	//returns the animTransformation. If it wasnt updated it means that this is the last position of the last animation
  }
 
   MyComponent.prototype.getTransformation = function()  //Transformation

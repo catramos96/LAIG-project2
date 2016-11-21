@@ -985,7 +985,7 @@ MySceneGraph.prototype.parseAnimations = function(rootElement) {
 				break;
 			}
 			default:
-				return "ERROR 1 (escrever isto depois)";
+				return "No type defined for Animation";
 		}
 		this.animationsList.set(id,anim);	//coloca a animacao na lista
 		
@@ -1119,12 +1119,11 @@ MySceneGraph.prototype.parseComponents = function(rootElement) {
 			this.transformationsList.set(matrixId,transfComponent);	
 		}
 
-		//<animation>
+		//<animation> NEW
 		var animations, n_animations, animationId;
 		var animationsComponent = [];
 		
-	
-		var num = 1;
+		var num = 1;	//if there is no block animation, materials will be the number 1 elem
 		animations = component.getElementsByTagName("animation");
 		if(animations.length != 0)
 		{
@@ -1133,15 +1132,15 @@ MySceneGraph.prototype.parseComponents = function(rootElement) {
 		    //For each animationref...
 		    for(var j = 0; j < n_animations;j++)
 		    {
-			animationId = this.reader.getString(animations[0].children[j],'id');
-			
-			if(!this.animationsList.has(animationId))	
-			{
-			    return "Component '" + id + "' animationref '" + animationId + "' not in the list of primitives";
-			}
-			animationsComponent.push(this.animationsList.get(animationId));
+				animationId = this.reader.getString(animations[0].children[j],'id');
+				
+				if(!this.animationsList.has(animationId))	
+				{
+					return "Component '" + id + "' animationref '" + animationId + "' not in the list of primitives";
+				}
+				animationsComponent.push(this.animationsList.get(animationId));
 		    }
-		    num = 2;
+		    num = 2;	//if block animation exists, materials will be the number 2 elem
 		}
 		 
 		//<materials>
@@ -1264,7 +1263,7 @@ MySceneGraph.prototype.parseComponents = function(rootElement) {
         comp.setComponents(childComponent);
        	comp.setPrimitives(primitiveComponent);
 	
-	 comp.setAnimations(animationsComponent);
+		comp.setAnimations(animationsComponent);	//adiciona animacao ao component
        		
        	//Adds the component to the componentsList
         this.componentsList.set(id,comp);
