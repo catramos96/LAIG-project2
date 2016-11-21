@@ -1,4 +1,7 @@
- function MyPatch(scene, data) {
+/*
+Class MyPatch
+*/
+function MyPatch(scene, data) {
      CGFobject.call(this,scene);
 	
      this.uDivs = data.getUDivs();					//u divisions
@@ -39,6 +42,7 @@
         getSurfacePoint = function(u, v) {
                 return nurbsSurface.getPoint(u, v);
         };
+        
  		//object
         this.surfaces = new CGFnurbsObject(this.scene, getSurfacePoint, this.uDivs, this.vDivs); 
         this.surfaces.display(); 

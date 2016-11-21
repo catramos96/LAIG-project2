@@ -1,3 +1,6 @@
+/*
+Class MyPlane
+*/
 function MyPlane(scene,data){
         CGFobject.call(this,scene);
         
@@ -30,12 +33,13 @@ MyPlane.prototype.init = function (){
                                    ]
                               ];
 
+  //surface
   var nurbsSurface = new CGFnurbsSurface(1, 1, knotsU, knotsV, controlvertexes);
         getSurfacePoint = function(u, v) {
                 return nurbsSurface.getPoint(u, v);
         };
  
-        this.surfaces = new CGFnurbsObject(this.scene, getSurfacePoint, this.uDivs, this.vDivs);  
+  this.surfaces = new CGFnurbsObject(this.scene, getSurfacePoint, this.uDivs, this.vDivs);  
 };
 
 MyPlane.prototype.display = function ()

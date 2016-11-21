@@ -1,3 +1,6 @@
+/*
+Class MyChessBoard
+*/
 function MyChessBoard(scene, data) {
      CGFobject.call(this,scene);
 
@@ -11,8 +14,10 @@ function MyChessBoard(scene, data) {
 	this.c2 = data.getC2();					//cor secundaria
 	this.c3 = data.getC3();					//cor de peão selecionada
 
+	//composition
 	this.plane = new MyPlane(this.scene,new MyPlaneData("plane",1,1,this.dU,this.dV));
-
+	
+	//shader
 	this.shader = new CGFshader(this.scene.gl, "shaders/board.vert", "shaders/board.frag");
 
 	this.shader.setUniformsValues({uSampler: 1});

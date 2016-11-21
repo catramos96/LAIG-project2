@@ -1,8 +1,11 @@
+/*
+Class MyVehicle
+*/
  function MyVehicle(scene) {
      CGFobject.call(this,scene);
      this.scene = scene;
 
-	//parts
+	//composition
      this.cylinder = new MyCylinder(scene,new MyCylinderData("",0.5,0.1,5,25,25));
      this.cylinder2 = new MyCylinder(scene,new MyCylinderData("",0.25,0.15,1.2,20,20));
      this.wing = new MyCylinder(scene,new MyCylinderData("",0.5,0.2,2,4,4));
@@ -21,7 +24,7 @@
 
  MyVehicle.prototype.init = function(){
 
- 	var cabineCP = [
+ 	var cabineCP = [							//cabine control points
  					[
  						[1,		0,	3,	1],
  						[-0.25,	0,	2.5,1],
@@ -49,6 +52,7 @@
  				];
  	this.cabine = new MyPatch(this.scene,new MyPatchData("",20,20,3,3,cabineCP));
 
+	//materials specifications
  	 this.lightPink.setAmbient(1, 0.7, 0.8, 1);
 	 this.lightPink.setDiffuse(1, 1, 1, 1);
 	 this.lightPink.setSpecular(1, 1, 1, 1);	
@@ -67,7 +71,7 @@
 
  MyVehicle.prototype.display = function() {
 
-	this.scene.pushMatrix();					//Tronco
+	this.scene.pushMatrix();					//body
 		this.pink.apply();
 		this.cylinder.display();
 	this.scene.popMatrix();
