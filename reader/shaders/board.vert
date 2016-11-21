@@ -24,8 +24,6 @@ void main() {
 
 	gl_Position = uPMatrix * uMVMatrix * coords;
 
-	
-
 	vTextureCoord = aTextureCoord;
 }
 

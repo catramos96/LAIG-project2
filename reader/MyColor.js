@@ -36,7 +36,7 @@ MyColor.prototype.equals = function(color){
  */
  
  MyColor.prototype.setCoordinates = function(r,g,b,a){
-   if(r < 0 || r > 255 || g < 0 || g >255 || b < 0 || b > 255 || a < 0 || a > 255)
+   if(r < 0 || r > 1 || g < 0 || g >1 || b < 0 || b > 1 || a < 0 || a > 1)
     return "color values to high or low";
  	this.r = r;
  	this.g = g;

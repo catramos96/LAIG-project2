@@ -28,9 +28,8 @@ XMLscene.prototype.init = function (application) {
 /*	//para a transparencia
 	this.gl.enable(this.gl.BLEND);
 	this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE);
-	*/
-
-	this.lastTime = -1;
+*/
+	this.lastTime = -1;		//for update scene
 };
 
 /**
@@ -92,6 +91,9 @@ XMLscene.prototype.initCamera = function () {
 	this.interface.setActiveCamera(this.camera);
 };
 
+/**
+ * Improvement of tp1 for faster scene.
+ */
 XMLscene.prototype.initPrimitives = function () {
 	
 	this.primitivesInit = new Map();
@@ -107,16 +109,16 @@ XMLscene.prototype.initPrimitives = function () {
 		else if(value instanceof MyTorusData){
 			this.primitivesInit.set(id,new MyTorus(this, value));
 		}
-		else if(value instanceof MyPlaneData){
+		else if(value instanceof MyPlaneData){			//aditional primitive
 			this.primitivesInit.set(id,new MyPlane(this, value));
 		}
-		else if(value instanceof MyPatchData){
+		else if(value instanceof MyPatchData){			//aditional primitive
 			this.primitivesInit.set(id,new MyPatch(this, value));
 		}
-		else if(value instanceof MyChessBoardData){
+		else if(value instanceof MyChessBoardData){		//aditional primitive
 			this.primitivesInit.set(id,new MyChessBoard(this, value));
 		}
-		else if(value instanceof MyVehicleData){
+		else if(value instanceof MyVehicleData){		//aditional primitive
 			this.primitivesInit.set(id,new MyVehicle(this));
 		}
 	}
@@ -198,10 +200,10 @@ XMLscene.prototype.setDefaultAppearance = function () {
 };
 
 /**
- *
+ * Update scene
  */
 XMLscene.prototype.update = function(currTime) {
-	if (this.lastTime == -1)	//primeira vez
+	if (this.lastTime == -1)	//first time
 	{
 		this.lastTime = currTime;
 		return;
@@ -225,7 +227,7 @@ XMLscene.prototype.onGraphLoaded = function () {
 
 	this.initTextures();	
 	
-	this.initPrimitives();
+	this.initPrimitives();	//new
 };
 
 /**
@@ -241,13 +243,10 @@ XMLscene.prototype.onGraphLoaded = function () {
 XMLscene.prototype.displayComponents = function (component,materials,texture) {
 
 	this.pushMatrix();
-
-	
-	console.log(component.getId());
 	
 	//Transformation matrix
-	this.multMatrix(component.getTransformation().getMatrix());
-	this.multMatrix(component.getAnimTransformation(this.deltaTime).getMatrix());
+	this.multMatrix(component.getTransformation().getMatrix());						//component transformation
+	this.multMatrix(component.getAnimTransformation(this.deltaTime).getMatrix());	//animation transformation ate this deltaTime
 	
 	//Materials
 	//var currMaterial = component.getCurrMaterial();
@@ -284,32 +283,37 @@ XMLscene.prototype.displayComponents = function (component,materials,texture) {
 	appearance.setTexture(textAppearance);
 	appearance.apply();
 
-	//Draws the primitives
+	//Draws the primitives (improvement of tp1)
 	var primitives = component.getPrimitives();
 	for (var i = 0; i < primitives.length; i++)
 	{
 	    var prim = primitives[i];	//informacoes sobre a primitiva (data)
 	    var primInit = null;
 	  
-	    if(prim instanceof MyRectangleData){
-		primInit = new MyRectangle(this,prim,lS,lT);
-		 primInit.display();
-	    }
-	    else if(prim instanceof MyTriangleData){
-		primInit = new MyTriangle(this,prim,lS,lT);
-		 primInit.display();
-	    }
-	    else if(this.primitivesInit.has(prim.getId())){
-		primInit = this.primitivesInit.get(prim.getId());	//objeto com a primtiva  
-		
-		if(primInit instanceof MyChessBoard)
+	    if(prim instanceof MyRectangleData)
 		{
-		    textAppearance = primInit.getTexture().getAppearance();
-		    appearance.setTexture(textAppearance);
-		    appearance.apply();
-		    textAppearance.bind(1);
-		}
-		primInit.display();
+			primInit = new MyRectangle(this,prim,lS,lT);
+			primInit.display();
+	    }
+	    else if(prim instanceof MyTriangleData)
+		{
+			primInit = new MyTriangle(this,prim,lS,lT);
+			primInit.display();
+	    }
+	    else if(this.primitivesInit.has(prim.getId()))
+		{
+			primInit = this.primitivesInit.get(prim.getId());	//objeto com a primitiva  
+		
+			//if MyChessBoard apply the appearance received and bind it
+			if(primInit instanceof MyChessBoard)
+			{
+				textAppearance = primInit.getTexture().getAppearance();
+				appearance.setTexture(textAppearance);
+				appearance.apply();
+				textAppearance.bind(1);
+			}
+			
+			primInit.display();
 	    }
 	}
 
@@ -336,6 +340,7 @@ XMLscene.prototype.display = function () {
 	//it's important that things depending on the proper loading of the graph only get executed after the graph has loaded correctly
 	if (this.graph.loadedOk)
 	{
+		//update period of the scene
 		this.setUpdatePeriod(10);
 		
 		// Initialize Model-View matrix as identity

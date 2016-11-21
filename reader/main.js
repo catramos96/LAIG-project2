@@ -34,17 +34,17 @@ serialInclude(['../lib/CGF.js', 'XMLscene.js',
 								'MySphereData.js',
 								'MyTorusData.js',
 								'MyInterface.js',
-								'MyPlane.js',
-								'MyPatch.js',
-								'MyVehicle.js',
-								'MyPlaneData.js',
-								'MyPatchData.js',
-								'MyVehicleData.js',
-								'Animation.js',
-								'LinearAnimation.js',
-								'CircularAnimation.js',
-								'MyChessBoardData.js',
-								'MyChessBoard.js',
+								'MyPlane.js',			//new
+								'MyPatch.js',			//new
+								'MyVehicle.js',			//new
+								'MyPlaneData.js',		//new
+								'MyPatchData.js',		//new
+								'MyVehicleData.js',		//new
+								'Animation.js',			//new
+								'LinearAnimation.js',	//new
+								'CircularAnimation.js',	//new
+								'MyChessBoardData.js',	//new
+								'MyChessBoard.js',		//new
 
 main=function()
 {

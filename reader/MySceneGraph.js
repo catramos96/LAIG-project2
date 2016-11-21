@@ -144,7 +144,7 @@ MySceneGraph.prototype.readSceneGraphFile = function(rootElement) {
 		return;
 	}
 	
-	//Parse Animations
+	//Parse Animations (NEW)
 	if(rootElement.children[8].nodeName != "animations"){
 		console.log("WARNING : dsx does not respect the formal order!");
 	}
@@ -824,7 +824,7 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 				prim = new MyTorusData(id,inn,o,sl,l);
 				break;
 			}
-			case "plane" : {
+			case "plane" : {	//NEW
 				var dx,dy,u,v;
 
 				dx = this.reader.getFloat(primitive.children[0], 'dimX');
@@ -835,7 +835,7 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 				prim = new MyPlaneData(id,dx,dy,u,v);
 				break;
 			}
-			case "patch" : {
+			case "patch" : {	//NEW
 				var oU,oV,pU,pV;
 
 				oU = this.reader.getFloat(primitive.children[0], 'orderU');
@@ -874,7 +874,7 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 				prim = new MyPatchData(id,pU,pV,oU,oV,controlPointsTotal);	
 				break;
 			}
-			case "chessboard": {
+			case "chessboard": {		//NEW
 				var du,dv,su,sv,texture,c = [];
 
 				var du = this.reader.getFloat(primitive.children[0], 'du');
@@ -906,7 +906,7 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 				prim = new MyChessBoardData(id,du,dv,texture,su,sv,c[0],c[1],c[2]);
 				break;
 			}
-			case "vehicle" : {
+			case "vehicle" : {	//NEW
 				prim = new MyVehicleData(id);
 				break;
 			}
@@ -920,7 +920,7 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 }
 
 /**
- * Method that parses elements of one block () and stores information in a specific data structure ()
+ * Method that parses elements of one block (animations) and stores information in a specific data structure (Animation)
  */
 MySceneGraph.prototype.parseAnimations = function(rootElement) {
 	
@@ -993,8 +993,7 @@ MySceneGraph.prototype.parseAnimations = function(rootElement) {
 		this.animationsList.set(id,anim);	//coloca a animacao na lista
 		
 		//DEBUG
-		this.animationsList.get(id).printInfo();
-		
+		//this.animationsList.get(id).printInfo();
 	}
 }
 
