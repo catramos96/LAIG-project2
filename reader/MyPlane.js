@@ -1,11 +1,10 @@
 function MyPlane(scene,data){
         CGFobject.call(this,scene);
-        this.dX = data.getDX();
-        this.dY = data.getDY();
-        this.uDivs = data.getUDivs();
-        this.vDivs = data.getVDivs();
-
-      
+        
+        this.dX = data.getDX();       //X dimension
+        this.dY = data.getDY();       //Y dimension
+        this.uDivs = data.getUDivs(); //u duvisions
+        this.vDivs = data.getVDivs(); //v divisions
 
         this.surfaces;
         this.init();                            
@@ -21,13 +20,13 @@ MyPlane.prototype.init = function (){
 
   var controlvertexes = [    // U = 0   
                                    [ // V = 0..1
-                                     [-this.dX/2, -this.dY/2, 0.0, 1],  //(0,0)
-                                     [-this.dX/2, this.dY/2, 0.0, 1 ] //(0,1)
+                                     [-this.dX/2, -this.dY/2, 0.0, 1],
+                                     [-this.dX/2, this.dY/2, 0.0, 1 ] 
                                    ],    // U = 1
                             // U = 1
                                    [ // V = 0..1
-                                     [this.dX/2, -this.dY/2, 0.0, 1 ],  //(1,0)
-                                     [this.dX/2, this.dY/2, 0.0, 1 ] //(1,1)                                           
+                                     [this.dX/2, -this.dY/2, 0.0, 1 ], 
+                                     [this.dX/2, this.dY/2, 0.0, 1 ]                                          
                                    ]
                               ];
 

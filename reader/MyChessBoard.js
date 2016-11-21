@@ -2,14 +2,14 @@ function MyChessBoard(scene, data) {
      CGFobject.call(this,scene);
 
 	this.scene = scene;
-    this.dU = data.getDU();	//dimensões
-    this.dV = data.getDV();	//dimensões
-    this.sU = data.getSU();	//posição do "peão"
-	this.sV = data.getSV();	//posição do "peão"
+    this.dU = data.getDU();					//dimensões
+    this.dV = data.getDV();					//dimensões
+    this.sU = data.getSU();					//posição do "peão"
+	this.sV = data.getSV();					//posição do "peão"
 	this.texture = data.getTexture();
-	this.c1 = data.getC1();	//cor primaria
-	this.c2 = data.getC2();	//cor secundaria
-	this.c3 = data.getC3();	//cor de peão selecionada
+	this.c1 = data.getC1();					//cor primaria
+	this.c2 = data.getC2();					//cor secundaria
+	this.c3 = data.getC3();					//cor de peão selecionada
 
 	this.plane = new MyPlane(this.scene,new MyPlaneData("plane",1,1,this.dU,this.dV));
 
@@ -39,7 +39,7 @@ function MyChessBoard(scene, data) {
   };
 
   MyChessBoard.prototype.display= function() {
-  	this.scene.setActiveShader(this.shader);
+  	this.scene.setActiveShader(this.shader);				//shader
 	this.plane.display();
-	this.scene.setActiveShader(this.scene.defaultShader);
+	this.scene.setActiveShader(this.scene.defaultShader);	//default shader
   };

@@ -2,12 +2,14 @@
      CGFobject.call(this,scene);
      this.scene = scene;
 
+	//parts
      this.cylinder = new MyCylinder(scene,new MyCylinderData("",0.5,0.1,5,25,25));
      this.cylinder2 = new MyCylinder(scene,new MyCylinderData("",0.25,0.15,1.2,20,20));
      this.wing = new MyCylinder(scene,new MyCylinderData("",0.5,0.2,2,4,4));
      this.front = new MySphere(scene,new MySphereData("",0.08,20,20));
      this.torus = new MyTorus(scene,new MyTorusData("",0.3,0.2,20,20));
 
+	//materials
      this.lightPink = new CGFappearance(scene);
      this.blue = new CGFappearance(scene);
      this.pink = new CGFappearance(scene);
@@ -65,7 +67,7 @@
 
  MyVehicle.prototype.display = function() {
 
-	this.scene.pushMatrix();			//Tronco
+	this.scene.pushMatrix();					//Tronco
 		this.pink.apply();
 		this.cylinder.display();
 	this.scene.popMatrix();
@@ -119,7 +121,7 @@
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();
-		this.scene.translate(-0.45,0.35,1);	//motor front
+		this.scene.translate(-0.45,0.35,1);		//motor front
 		this.scene.scale(2,2,1);
 		this.blue.apply();
 		this.front.display();
@@ -148,13 +150,13 @@
 
 	this.scene.pushMatrix();
 		
-		this.scene.scale(2,2,2);	//back
+		this.scene.scale(2,2,2);				//back
 		this.lightPink.apply();
 		this.torus.display();
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();
-		this.scene.translate(0,0,5,1);	//front
+		this.scene.translate(0,0,5,1);			//front
 		this.scene.scale(1.25,1.25,1.5);
 		this.scene.rotate(Math.PI/6,0,0,1);
 		this.blue.apply();

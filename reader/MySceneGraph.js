@@ -846,30 +846,32 @@ MySceneGraph.prototype.parsePrimitives = function(rootElement) {
 				var n_children = (oU + 1) * (oV + 1);
 				var controlPoints = primitive.children[0].children;
 
-				/*if(primitive.children[i].children.length)*/
+				//check number of control points
 				if(controlPoints.length != n_children){
 					return controlPoints.length + " for " + oU + "uKnots and " + oV + " vKnots";
 				}
 
-				var nU,nV;
-				var x,y,z;
+				var nU,nV;	//number in u  and number in v
+				var x,y,z;	//coordinates
 				var tmp = [];
 				var controlPointsTotal = [];
 
 				for(nU = 0; nU < oU+1 ; nU++){		//order U
+
 					tmp = [];
+
 					for(nV = 0; nV < oV+1 ; nV++){	//order V
+					
 						x = this.reader.getFloat(controlPoints[nU * (oV+1) + nV], 'x');
 						y = this.reader.getFloat(controlPoints[nU * (oV+1) + nV], 'y');
 						z = this.reader.getFloat(controlPoints[nU * (oV+1) + nV], 'z');
 
-						tmp.push([x,y,z,1]);
+						tmp.push([x,y,z,1]);		//list for v = nV
 					}
-					controlPointsTotal.push(tmp);
+					controlPointsTotal.push(tmp);	//list for u = nU
 				}
 				
-				//console.log(controlPointsTotal);
-				prim = new MyPatchData(id,pU,pV,oU,oV,controlPointsTotal);		//AQUI
+				prim = new MyPatchData(id,pU,pV,oU,oV,controlPointsTotal);	
 				break;
 			}
 			case "chessboard": {

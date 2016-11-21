@@ -1,9 +1,13 @@
+/**
+ * Data Struct of MyPatchData
+ * Descendent of MyPrimitive
+ */
  function MyPatchData(id, uDivs, vDivs,uOrder,vOrder,controlPoints) {
      this.id = id;
-     this.uDivs = uDivs;
-     this.vDivs = vDivs;
-     this.uOrder = uOrder;
-     this.vOrder = vOrder;
+     this.uDivs = uDivs;    //u duvisions
+     this.vDivs = vDivs;    //v divisions
+     this.uOrder = uOrder;  //u order
+     this.vOrder = vOrder;  //v order
      this.controlPoints = controlPoints;
  }
 

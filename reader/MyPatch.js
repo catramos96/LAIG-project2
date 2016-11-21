@@ -1,11 +1,11 @@
  function MyPatch(scene, data) {
      CGFobject.call(this,scene);
 	
-     this.uDivs = data.getUDivs();
-     this.vDivs = data.getVDivs();
-     this.uOrder = data.getUOrder();
-     this.vOrder = data.getVOrder();
-     this.controlPoints = data.getControlPoints();
+     this.uDivs = data.getUDivs();					//u divisions
+     this.vDivs = data.getVDivs();					//v divisions
+     this.uOrder = data.getUOrder();				//u order
+     this.vOrder = data.getVOrder();				//v order
+     this.controlPoints = data.getControlPoints();	//control points
      this.surfaces;
 
      this.init();

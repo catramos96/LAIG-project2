@@ -1,9 +1,14 @@
+/**
+ * Data Struct of MyPlaneData
+ * Descendent of MyPrimitive
+ */
+
  function MyPlaneData(id,dX,dY, uDivs, vDivs) {
      this.id = id;
-     this.dX = dX;
-     this.dY = dY;
-     this.uDivs = uDivs;
-     this.vDivs = vDivs;
+     this.dX = dX;        //X dimensions
+     this.dY = dY;        //Y dimensions
+     this.uDivs = uDivs;  //u divisions
+     this.vDivs = vDivs;  //v divisions
  }
 
  MyPlaneData.prototype = new MyPrimitive(this.id); 

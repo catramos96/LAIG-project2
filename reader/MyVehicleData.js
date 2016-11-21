@@ -1,3 +1,7 @@
+ /**
+ * Data Struct of MyVehicleData
+ * Descendent of MyPrimitive
+ */
  function MyVehicleData(id) {
      this.id = id;
  }

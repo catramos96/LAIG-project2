@@ -1,13 +1,17 @@
+/**
+ * Data Struct of MyChessBoardData
+ * Descendent of MyPrimitive
+ */
  function MyChessBoardData(id, dU,dV,texture,sU,sV,c1,c2,c3) {
      this.id = id;
-     this.dU = dU;
-     this.dV = dV;
-     this.texture = texture;
-     this.sU = sU;
-     this.sV = sV;
-     this.c1 = c1; 
-     this.c2 = c2;
-     this.c3 = c3;
+     this.dU = dU;            //u dimensions
+     this.dV = dV;            //v dimensions
+     this.texture = texture;  
+     this.sU = sU;            //position in u
+     this.sV = sV;            //position in v
+     this.c1 = c1;            //primary color
+     this.c2 = c2;            //secondary color
+     this.c3 = c3;            //set color
  }
 
  MyChessBoardData.prototype = new MyPrimitive(this.id); 
