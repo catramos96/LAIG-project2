@@ -6,7 +6,7 @@
   
     <views default="general" >
 		<perspective id="general" near="0.1" far="500" angle="35">
-            <from x="15" y="15" z="15" />
+            <from x="20" y="15" z="20" />
             <to x="0" y="0" z="0" />
         </perspective>
 
@@ -34,9 +34,9 @@
             <specular r="0.7" g="0.7" b="0.7" a="1" />
         </omni>
 	
-        <spot id="spot_earth" enabled="1" angle="60" exponent="3">
-            <target x="10" y="6" z="8" />
-            <location x="11" y="7" z="11" />
+        <spot id="spot_base1" enabled="1" angle="60" exponent="3">
+            <target x="2" y="1" z="9" />
+            <location x="2" y="5" z="9" />
             <ambient r="0.2" g="0.2" b="0.2" a="1" />
             <diffuse r="0.7" g="0.7" b="0.7" a="1" />
             <specular r="0.2" g="0.2" b="0.2" a="1" />
@@ -50,9 +50,9 @@
             <specular r="0.6" g="0.6" b="0.6" a="1" />
         </spot>
 
-		<spot id="spot_ship" enabled="1" angle="60" exponent="8">
-            <target x="4" y="7" z="10" />
-            <location x="4" y="9" z="12" />
+		<spot id="spot_base2" enabled="1" angle="60" exponent="8">
+            <target x="9" y="1" z="2" />
+            <location x="9" y="5" z="2" />
             <ambient r="0.2" g="0.2" b="0.2" a="1" />
             <diffuse r="1" g="1" b="1" a="1" />
             <specular r="0.6" g="0.6" b="0.6" a="1" />
@@ -176,26 +176,26 @@
 		<!-- novas primitivas -->
 	
 		<primitive id="firstBoard">
-       		<chessboard du="20" dv="20" textureref="marmoreTexture" su="8" sv="8">
-				<c1 r="0.0" g="0.0" b="0.0" a="1.0" />
-				<c2 r="0" g="0" b="0.5" a="1.0" />
+       		<chessboard du="20" dv="20" textureref="satelliteTexture" su="8" sv="8">
+				<c1 r="0.3" g="0.15" b="0.15" a="1.0" />
+				<c2 r="0.8" g="0.6" b="0.6" a="1.0" />
 				<cs r="1.0" g="0.0" b="0.0" a="1.0" />
             </chessboard>
        </primitive>
 	   
 	   <primitive id="base1Board">
-       		<chessboard du="6" dv="10" textureref="marmoreTexture" su="1" sv="1">
-				<c1 r="0.0" g="0.0" b="0.0" a="1.0" />
-				<c2 r="0" g="0" b="0.5" a="1.0" />
-				<cs r="1.0" g="0.0" b="0.0" a="1.0" />
+       		<chessboard du="3" dv="15" textureref="marmoreTexture" su="-1" sv="-1">
+				<c1 r="0.25" g="0.5" b="0.5" a="1.0" />
+				<c2 r="0.75" g="0.75" b="0.75" a="1.0" />
+				<cs r="0.0" g="1.0" b="0.0" a="1.0" />
             </chessboard>
        </primitive>
 	   
 	   	<primitive id="base2Board">
-       		<chessboard du="15" dv="5" textureref="marmoreTexture" su="1" sv="1">
-				<c1 r="0.0" g="0.0" b="0.0" a="1.0" />
-				<c2 r="0" g="0" b="0.5" a="1.0" />
-				<cs r="1.0" g="0.0" b="0.0" a="1.0" />
+       		<chessboard du="50" dv="50" textureref="marmoreTexture" su="7" sv="3">
+				<c1 r="0.25" g="0.0" b="0.25" a="1.0" />
+				<c2 r="0.75" g="0.75" b="0.75" a="1.0" />
+				<cs r="0.0" g="0.0" b="1.0" a="1.0" />
             </chessboard>
        </primitive> 
 	   
@@ -494,8 +494,8 @@
 		<component id="Board3">																														
         
             <transformation>
-            	<scale x="2" y="2" z="1" />
-            	<translate x="1" y ="5" z ="1"/>
+            	<scale x="3" y="3" z="1" />
+            	<translate x="0.8" y ="3.2" z ="1"/>
             </transformation>
        
 			<materials>
